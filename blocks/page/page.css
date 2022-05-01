@@ -1,0 +1,12 @@
+.page {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  min-width: 1280px;
+}
+
+*,
+*::before,
+*::after {
+  outline: 1px solid red
+}

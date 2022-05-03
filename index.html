@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./page/index.css" />
+    <link rel="stylesheet" href="./pages/index.css" />
     <title>Mesto</title>
   </head>
   <body class="page">
@@ -70,8 +70,20 @@
         </ul>
       </main>
       <footer class="footer page__footer">
-        <p class="footer__text">© 2020 Mesto Russia</p>
+        <p class="footer__text">&copy; 2020 Mesto Russia</p>
       </footer>
+    </div>
+    <div class="popup">
+      <div class="popup__container">
+        <form action="" class="popup__form">
+          <fieldset class="popup__fieldset">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input class="popup__text-field" type="text" value="Жак-Ив Кусто" /><br />
+            <input class="popup__text-field" type="text" value="Исследователь океана" /><br />
+            <button class="popup__save-button">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
     </div>
   </body>
 </html>

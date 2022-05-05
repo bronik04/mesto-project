@@ -1,1 +1,3 @@
-.page__contanier {}
+.popup__container {
+  position: relative;
+}

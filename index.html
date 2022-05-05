@@ -14,7 +14,11 @@
       </header>
       <main class="content page__content">
         <section class="profile page__profile">
-          <img src="./images/avatar.jpg" alt="Фотография Жака Кусто." class="profile__avatar" />
+          <img
+            src="./images/avatar.jpg"
+            alt="Фотография Жака Кусто."
+            class="profile__avatar"
+          />
           <div class="profile__info">
             <div class="profile__name-wrap">
               <p class="profile__name">Жак-Ив Кусто</p>
@@ -26,7 +30,11 @@
         </section>
         <ul class="elements">
           <li class="element">
-            <img src="./images/01_vulkan_krenizyna.jpeg" alt="" class="element__img" />
+            <img
+              src="./images/01_vulkan_krenizyna.jpeg"
+              alt=""
+              class="element__img"
+            />
             <div class="element__wrap">
               <p class="element__text">Вулкан Креницына</p>
               <div class="element__heart"></div>
@@ -73,13 +81,22 @@
         <p class="footer__text">&copy; 2020 Mesto Russia</p>
       </footer>
     </div>
-    <div class="popup">
+    <div class="popup popup_opened">
       <div class="popup__container">
+        <div class="popup__close-button"></div>
         <form action="" class="popup__form">
           <fieldset class="popup__fieldset">
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input class="popup__text-field" type="text" value="Жак-Ив Кусто" /><br />
-            <input class="popup__text-field" type="text" value="Исследователь океана" /><br />
+            <input
+              class="popup__text-field"
+              type="text"
+              value="Жак-Ив Кусто"
+            /><br />
+            <input
+              class="popup__text-field"
+              type="text"
+              value="Исследователь океана"
+            /><br />
             <button class="popup__save-button">Сохранить</button>
           </fieldset>
         </form>

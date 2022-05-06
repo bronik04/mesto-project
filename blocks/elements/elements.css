@@ -9,8 +9,8 @@
   row-gap: 20px;
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .elements {
     grid-template-columns: 282px;
   }
-}
+} */

@@ -1,6 +1,22 @@
 .profile__edit-button {
   background-image: url(../../../images/Edit\ Button.svg);
+  background-size: cover;
+  border: none;
+  background-color: #000;
+  cursor: pointer;
   align-self: end;
   width: 24px;
   height: 24px;
+}
+
+/* Сделать модификатор */
+.profile__edit-button:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width:600px) {
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+  }
 }

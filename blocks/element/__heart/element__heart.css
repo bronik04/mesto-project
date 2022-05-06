@@ -3,4 +3,15 @@
   width: 22px;
   height: 19px;
   align-self: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.element__heart:hover {
+  background-image: url(../../../images/hover-heart.svg);
+}
+
+.element__heart:active {
+  background-image: url(../../../images/active-heart.svg);
 }

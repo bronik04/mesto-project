@@ -2,3 +2,10 @@
   margin: 0 auto;
   margin-bottom: 50px;
 }
+
+@media screen and (max-width: 600px) {
+  .page__profile {
+    max-width: 282px;
+    margin-bottom: 36px;
+  }
+}

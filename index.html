@@ -1,122 +1,95 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
-    <title>Mesto</title>
-  </head>
-  <body class="page">
-    <div class="page__contanier">
-      <header class="header page__header">
-        <div class="logo"></div>
-      </header>
-      <main class="content page__content">
-        <section class="profile page__profile">
-          <img
-            src="./images/avatar.jpg"
-            alt="Фотография Жака Кусто."
-            class="profile__avatar"
-          />
-          <div class="profile__info">
-            <div class="profile__name-wrap">
-              <p class="profile__name">Жак-Ив Кусто</p>
-              <button class="profile__edit-button"></button>
-            </div>
-            <p class="profile__description">Исследователь океана</p>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./pages/index.css" />
+  <title>Mesto</title>
+</head>
+
+<body class="page">
+  <div class="page__contanier">
+    <header class="header page__header">
+      <img class="logo" src="./images/logo.svg" alt="Логотип сайта Место.">
+    </header>
+    <main class="content page__content">
+      <section class="profile page__profile">
+        <img src="./images/avatar.jpg" alt="Аватар пользователя." class="profile__avatar" />
+        <div class="profile__info">
+          <div class="profile__name-wrap">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button" type="button" aria-label="Редактировать профиль."></button>
           </div>
-          <button class="profile__add-button"></button>
-        </section>
+          <p class="profile__description">Исследователь океана</p>
+        </div>
+        <button class="profile__add-button" type="button" aria-label="Добавить фото."></button>
+      </section>
+      <section class="gallery">
         <ul class="elements">
           <li class="element">
-            <img
-              src="./images/01_vulkan_krenizyna.jpeg"
-              alt="Вулкан в центре озера."
-              class="element__img"
-            />
+            <img src="./images/01_vulkan_krenizyna.jpeg" alt="Вулкан в центре озера." class="element__img" />
             <div class="element__wrap">
-              <p class="element__text">Вулкан Креницына</p>
-              <button class="element__heart"></button>
+              <h2 class="element__text">Вулкан Креницына</h2>
+              <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
           <li class="element">
-            <img
-              src="./images/02_Gamstul.jpeg"
-              alt="Горная деревня."
-              class="element__img"
-            />
+            <img src="./images/02_Gamstul.jpeg" alt="Горная деревня." class="element__img" />
             <div class="element__wrap">
-              <p class="element__text">Гамсутль</p>
-              <button class="element__heart"></button>
+              <h2 class="element__text">Гамсутль</h2>
+              <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
           <li class="element">
-            <img
-              src="./images/03_Ruskeala.jpeg"
-              alt="Мраморный каньон Рускеала."
-              class="element__img"
-            />
+            <img src="./images/03_Ruskeala.jpeg" alt="Мраморный каньон Рускеала." class="element__img" />
             <div class="element__wrap">
-              <p class="element__text">Рускеала</p>
-              <button class="element__heart"></button>
+              <h2 class="element__text">Рускеала</h2>
+              <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
           <li class="element">
-            <img
-              src="./images/04_Teriberka.jpeg"
-              alt="Кладбище кораблей."
-              class="element__img"
-            />
+            <img src="./images/04_Teriberka.jpeg" alt="Кладбище кораблей." class="element__img" />
             <div class="element__wrap">
-              <p class="element__text">Териберка</p>
-              <button class="element__heart"></button>
+              <h2 class="element__text">Териберка</h2>
+              <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
           <li class="element">
-            <img
-              src="./images/05_Bolgar.jpeg"
-              alt="Древний город Болгар."
-              class="element__img"
-            />
+            <img src="./images/05_Bolgar.jpeg" alt="Древний город Болгар." class="element__img" />
             <div class="element__wrap">
-              <p class="element__text">Болгар</p>
-              <button class="element__heart"></button>
+              <h2 class="element__text">Болгар</h2>
+              <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
           <li class="element">
-            <img
-              src="./images/06_Big-Bogdo.jpeg"
-              alt="Гора Большой Богдо."
-              class="element__img"
-            />
+            <img src="./images/06_Big-Bogdo.jpeg" alt="Гора Большой Богдо." class="element__img" />
             <div class="element__wrap">
-              <p class="element__text">Большой Богдо</p>
-              <button class="element__heart"></button>
+              <h2 class="element__text">Большой Богдо</h2>
+              <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
         </ul>
-      </main>
-      <footer class="footer page__footer">
-        <p class="footer__text">&copy; 2020 Mesto Russia</p>
-      </footer>
+      </section>
+    </main>
+    <footer class="footer page__footer">
+      <p class="footer__text">&copy; 2020 Mesto Russia</p>
+    </footer>
+  </div>
+  <div class="popup popup_opened">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button" aria-label="Закрыть окно."></button>
+      <form class="popup__form" name="profile-edit-form">
+        <fieldset class="popup__fieldset">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input class="popup__text-field" type="text" value="Жак-Ив Кусто" />
+          <input class="popup__text-field" type="text" value="Исследователь океана" />
+          <button class="popup__save-button" type="submit" aria-label="Сохранить.">Сохранить</button>
+        </fieldset>
+      </form>
     </div>
-    <div class="popup popup_opened">
-      <div class="popup__container">
-        <div class="popup__close-button"></div>
-        <form class="popup__form">
-          <fieldset class="popup__fieldset">
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <input class="popup__text-field" type="text" value="Жак-Ив Кусто" />
-            <input
-              class="popup__text-field"
-              type="text"
-              value="Исследователь океана"
-            />
-            <button class="popup__save-button">Сохранить</button>
-          </fieldset>
-        </form>
-      </div>
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>

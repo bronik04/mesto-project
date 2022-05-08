@@ -18,6 +18,8 @@
 
 @media screen and (max-width: 600px) {
   .profile__add-button {
+    /* Ничего лучше придумать не смог как заменить картинку, возможно есть более изящный вариант но я пока его не вижу */
+    background-image: url(../../../images/plus-icon-mobile.svg);
     width: 282px;
     height: 50px;
   }

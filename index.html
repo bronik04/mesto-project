@@ -32,7 +32,7 @@
             <img src="./images/01_vulkan_krenizyna.jpeg" alt="Вулкан в центре озера." class="element__img" />
             <div class="element__wrap">
               <h2 class="element__text">Вулкан Креницына</h2>
-              <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
+              <button class="element__heart element__heart_active" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
           <li class="element">
@@ -77,19 +77,49 @@
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
-  <div class="popup popup_opened">
+
+  <!-- !Форма редактирования профиля -->
+
+  <div class="popup popup_type_edit">
     <div class="popup__container">
       <button class="popup__close-button" type="button" aria-label="Закрыть окно."></button>
       <form class="popup__form" name="profile-edit-form">
         <fieldset class="popup__fieldset">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input class="popup__text-field" type="text" value="Жак-Ив Кусто" />
-          <input class="popup__text-field" type="text" value="Исследователь океана" />
+          <input class="popup__text-field popup__text-field_type_name" type="text" name="name" value="Жак Кусто" />
+          <input class="popup__text-field popup__text-field_type_description" type="text" name="description" />
           <button class="popup__save-button" type="submit" aria-label="Сохранить.">Сохранить</button>
         </fieldset>
       </form>
     </div>
   </div>
+
+  <!-- !Форма добавления фотографии -->
+
+  <div class="popup popup_type_add">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button" aria-label="Закрыть окно."></button>
+      <form class="popup__form" name="profile-edit-form">
+        <fieldset class="popup__fieldset">
+          <h2 class="popup__title">Новое место</h2>
+          <input class="popup__text-field" type="text" placeholder="Название" />
+          <input class="popup__text-field" type="text" placeholder="Ссылка на картинку" />
+          <!-- todo поменять класс кнопке -->
+          <button class="popup__save-button" type="submit" aria-label="Создать.">Создать</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <template>
+    <li class="element">
+      <img src="./images/06_Big-Bogdo.jpeg" alt="Гора Большой Богдо." class="element__img" />
+      <div class="element__wrap">
+        <h2 class="element__text">Большой Богдо</h2>
+        <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
+      </div>
+    </li>
+  </template>
+  <script src="./script/index.js"></script>
 </body>
 
 </html>

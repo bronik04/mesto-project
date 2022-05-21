@@ -4,6 +4,11 @@
   font-size: 42px;
   line-height: 48px;
   margin-right: 18px;
+  /* Переполнение */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 336px;
 }
 
 @media screen and (max-width: 600px) {

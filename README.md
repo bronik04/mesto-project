@@ -6,6 +6,7 @@
 - Grid
 - Flexbox
 - Верстка форм
+- JS
 
 ### Ссылка на GitHab Pages
 

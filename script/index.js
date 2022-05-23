@@ -26,22 +26,17 @@ closeButton.addEventListener("click", function () {
   popup.classList.remove("popup_opened");
 });
 
-// Пункт второй
+// Пункт второй. Редактирование имени и информации о себе
+
 const formElement = document.querySelector(".popup__form");
-console.log("formElement: ", formElement);
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
-
-  // Получите значение полей jobInput и nameInput из свойства value
-
-  // Выберите элементы, куда должны быть вставлены значения полей
-
-  // Вставьте новые значения с помощью textContent
+  ProfileName.textContent = PopupName.value;
+  ProfileDescription.textContent = PopupDescription.value;
+  popup.classList.remove("popup_opened");
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
 formElement.addEventListener("submit", formSubmitHandler);
 
 // 5. Лайк карточки

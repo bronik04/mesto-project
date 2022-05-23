@@ -1,9 +1,9 @@
-let popup = document.querySelector(".popup");
+let popup = document.querySelectorAll(".popup");
 let popupEdit = document.querySelector(".popup_type_edit");
 let popupAdd = document.querySelector(".popup_type_add");
 let editButton = document.querySelector(".profile__edit-button");
 let addButton = document.querySelector(".profile__add-button");
-let closeButton = document.querySelector(".popup__close-button");
+let closeButton = document.querySelectorAll(".popup__close-button");
 let ProfileName = document.querySelector(".profile__name");
 let ProfileDescription = document.querySelector(".profile__description");
 let PopupName = document.querySelector(".popup__text-field_type_name");
@@ -11,22 +11,36 @@ let PopupDescription = document.querySelector(
   ".popup__text-field_type_description"
 );
 
-PopupName.value = ProfileName.textContent;
-PopupDescription.value = ProfileDescription.textContent;
+// 1. Работа модальных окон. Открытие и закрытие модального окна
 
 editButton.addEventListener("click", function () {
   popupEdit.classList.add("popup_opened");
 });
 
-addButton.addEventListener("click", function () {
-  popupAdd.classList.add("popup_opened");
+// ? Можно ли было сделать проще?
+
+function closePopup() {
+  popup.forEach((item, index) => {
+    popup[index].classList.remove("popup_opened");
+  });
+}
+
+closeButton.forEach((item, index) => {
+  closeButton[index].addEventListener("click", closePopup);
 });
 
-closeButton.addEventListener("click", function () {
-  popup.classList.remove("popup_opened");
-});
+// closeButton[0].addEventListener("click", closePopup);
+// closeButton[1].addEventListener("click", closePopup);
+// console.log("closeButton: ", closeButton);
 
-// Пункт второй. Редактирование имени и информации о себе
+// closeButton.addEventListener("click", function () {
+//   popup.classList.remove("popup_opened");
+// });
+
+PopupName.value = ProfileName.textContent;
+PopupDescription.value = ProfileDescription.textContent;
+
+// Редактирование имени и информации о себе
 
 const formElement = document.querySelector(".popup__form");
 
@@ -39,9 +53,22 @@ function formSubmitHandler(evt) {
 
 formElement.addEventListener("submit", formSubmitHandler);
 
-// Пункт третий. Шесть карточек «из коробки»
+// 2. Шесть карточек «из коробки»
+// https://cuva.ru/blog/20-udivitelnyh-mest-rossii
 
 const initialCards = [
+  {
+    name: "Алмазная шахта «Мир», Якутия",
+    link: "https://static.tildacdn.com/tild6336-3238-4436-b966-313836346165/02_shachta_mir.jpg",
+  },
+  {
+    name: "Ординская пещера, Пермский край",
+    link: "https://static.tildacdn.com/tild3931-6539-4230-b733-383936376339/03_ordinskaya_pesher.jpg",
+  },
+  {
+    name: "Соловецкий монастырь, Архангельская область",
+    link: "https://static.tildacdn.com/tild6130-6139-4366-b034-383961383638/04_Solovki.jpg",
+  },
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -76,6 +103,7 @@ function addCards(cardName, cardImgLink) {
 
   cardElement.querySelector(".element__text").textContent = cardName;
   cardElement.querySelector(".element__img").src = cardImgLink;
+  // Почему такой странный перенос строк? Как исправить?
   cardElement
     .querySelector(".element__heart")
     .addEventListener("click", function (evt) {
@@ -89,10 +117,17 @@ initialCards.forEach((item) => {
   addCards(item.name, item.link);
 });
 
-// 5. Лайк карточки
-// Видимо нужно делать в цикле
-let elementHeart = document.querySelector(".element__heart");
+// 3. Форма добавления карточки
 
-elementHeart.addEventListener("click", function (evt) {
-  evt.target.classList.toggle("element__heart_active");
+addButton.addEventListener("click", function () {
+  popupAdd.classList.add("popup_opened");
 });
+
+// 5. Лайк карточки
+// Почему не работает?
+
+// let elementHeart = document.querySelector(".element__heart");
+
+// elementHeart.addEventListener("click", function (evt) {
+//   evt.target.classList.toggle("element__heart_active");
+// });

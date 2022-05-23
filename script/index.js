@@ -39,10 +39,59 @@ function formSubmitHandler(evt) {
 
 formElement.addEventListener("submit", formSubmitHandler);
 
+// Пункт третий. Шесть карточек «из коробки»
+
+const initialCards = [
+  {
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
+  {
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+  {
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+  {
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+  {
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+  {
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  },
+];
+
+let elements = document.querySelector(".elements");
+
+function addCards(cardName, cardImgLink) {
+  const cardTemplate = document.querySelector("#card-template").content;
+  const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
+
+  cardElement.querySelector(".element__text").textContent = cardName;
+  cardElement.querySelector(".element__img").src = cardImgLink;
+  cardElement
+    .querySelector(".element__heart")
+    .addEventListener("click", function (evt) {
+      evt.target.classList.toggle("element__heart_active");
+    });
+
+  elements.append(cardElement);
+}
+
+initialCards.forEach((item) => {
+  addCards(item.name, item.link);
+});
+
 // 5. Лайк карточки
 // Видимо нужно делать в цикле
 let elementHeart = document.querySelector(".element__heart");
-console.log("elementHeart: ", elementHeart);
 
 elementHeart.addEventListener("click", function (evt) {
   evt.target.classList.toggle("element__heart_active");

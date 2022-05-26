@@ -83,12 +83,13 @@
   <div class="popup popup_type_edit">
     <div class="popup__container">
       <button class="popup__close-button" type="button" aria-label="Закрыть окно."></button>
-      <form class="popup__form" name="profile-edit-form">
+      <form class="popup__form popup__form_type_edit" name="profile-edit-form">
         <fieldset class="popup__fieldset">
           <h2 class="popup__title">Редактировать профиль</h2>
           <input class="popup__text-field popup__text-field_type_name" type="text" name="name" value="Жак Кусто" />
           <input class="popup__text-field popup__text-field_type_description" type="text" name="description" />
-          <button class="popup__save-button" type="submit" aria-label="Сохранить.">Сохранить</button>
+          <button class="popup__save-button popup__save-button_type_edit" type="submit"
+            aria-label="Сохранить.">Сохранить</button>
         </fieldset>
       </form>
     </div>
@@ -102,19 +103,32 @@
       <form class="popup__form" name="profile-edit-form">
         <fieldset class="popup__fieldset">
           <h2 class="popup__title">Новое место</h2>
-          <input class="popup__text-field" type="text" placeholder="Название" />
-          <input class="popup__text-field" type="text" placeholder="Ссылка на картинку" />
+          <!-- todo убрать testvalue -->
+          <input class="popup__text-field popup__text-field_type_place-name" type="text" placeholder="Название"
+            value="Чарские пески, Забайкалье" />
+          <input class="popup__text-field popup__text-field_type_place-link" type="text"
+            placeholder="Ссылка на картинку"
+            value="https://static.tildacdn.com/tild6237-3434-4061-b334-633431633834/05_charskie_peski.jpg" />
           <!-- todo поменять класс кнопке -->
-          <button class="popup__save-button" type="submit" aria-label="Создать.">Создать</button>
+          <button class="popup__save-button popup__save-button_type_img" type="click"
+            aria-label="Создать.">Создать</button>
         </fieldset>
       </form>
     </div>
   </div>
+  <!-- ! Попап для зум фото -->
+  <div class="popup popup_type_zoom">
+    <div class="popup__img">
+      <button class="popup__close-button" type="button" aria-label="Закрыть окно."></button>
+    </div>
+  </div>
+
   <template id="card-template">
     <li class="element">
-      <img src="./images/06_Big-Bogdo.jpeg" alt="Гора Большой Богдо." class="element__img" />
+      <button class="element__trash-button"></button>
+      <img src="#" alt="Фото места" class="element__img" />
       <div class="element__wrap">
-        <h2 class="element__text">Большой Богдо</h2>
+        <h2 class="element__text">Название места</h2>
         <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
       </div>
     </li>

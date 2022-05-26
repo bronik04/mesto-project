@@ -4,10 +4,10 @@ let popupAdd = document.querySelector(".popup_type_add");
 let editButton = document.querySelector(".profile__edit-button");
 let addButton = document.querySelector(".profile__add-button");
 let closeButton = document.querySelectorAll(".popup__close-button");
-let ProfileName = document.querySelector(".profile__name");
-let ProfileDescription = document.querySelector(".profile__description");
-let PopupName = document.querySelector(".popup__text-field_type_name");
-let PopupDescription = document.querySelector(
+let profileName = document.querySelector(".profile__name");
+let profileDescription = document.querySelector(".profile__description");
+let popupName = document.querySelector(".popup__text-field_type_name");
+let popupDescription = document.querySelector(
   ".popup__text-field_type_description"
 );
 
@@ -29,26 +29,21 @@ closeButton.forEach((item, index) => {
   closeButton[index].addEventListener("click", closePopup);
 });
 
-// closeButton[0].addEventListener("click", closePopup);
-// closeButton[1].addEventListener("click", closePopup);
-// console.log("closeButton: ", closeButton);
-
-// closeButton.addEventListener("click", function () {
-//   popup.classList.remove("popup_opened");
-// });
-
-PopupName.value = ProfileName.textContent;
-PopupDescription.value = ProfileDescription.textContent;
+popupName.value = profileName.textContent;
+popupDescription.value = profileDescription.textContent;
 
 // Редактирование имени и информации о себе
 
 const formElement = document.querySelector(".popup__form");
+const popupTypeEdit = document.querySelector(".popup_type_edit");
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
-  ProfileName.textContent = PopupName.value;
-  ProfileDescription.textContent = PopupDescription.value;
-  popup.classList.remove("popup_opened");
+  profileName.textContent = popupName.value;
+  profileDescription.textContent = popupDescription.value;
+  popupTypeEdit.classList.remove("popup_opened");
+  // Можно было и так
+  //closePopup();
 }
 
 formElement.addEventListener("submit", formSubmitHandler);
@@ -109,8 +104,15 @@ function addCards(cardName, cardImgLink) {
     .addEventListener("click", function (evt) {
       evt.target.classList.toggle("element__heart_active");
     });
+  // Нужно ли здесь добовлять кнопку удаления?
+  cardElement
+    .querySelector(".element__trash-button")
+    .addEventListener("click", function (evt) {
+      evt.target.closest(".element").remove();
+    });
 
-  elements.append(cardElement);
+  //elements.append(cardElement);
+  elements.prepend(cardElement);
 }
 
 initialCards.forEach((item) => {
@@ -123,11 +125,26 @@ addButton.addEventListener("click", function () {
   popupAdd.classList.add("popup_opened");
 });
 
-// 5. Лайк карточки
-// Почему не работает?
+// 4. Добавление карточки
+const popupTypeAdd = document.querySelector(".popup_type_add");
+const addNewPlace = document.querySelector(".popup__save-button_type_img");
+const placeName = document.querySelector(".popup__text-field_type_place-name");
+const placeLink = document.querySelector(".popup__text-field_type_place-link");
 
-// let elementHeart = document.querySelector(".element__heart");
+addNewPlace.addEventListener("click", function (evt) {
+  evt.preventDefault();
+  addCards(placeName.value, placeLink.value);
+  popupTypeAdd.classList.remove("popup_opened");
+});
 
-// elementHeart.addEventListener("click", function (evt) {
-//   evt.target.classList.toggle("element__heart_active");
-// });
+// 6. Удаление карточки
+//  Удаляет все карточки и только по нажатию на первую кнопку
+
+// ! Почему это работает в функции добавления карточек а здесь нет?
+
+// function deleteCardHandler(evt) {
+//   evt.target.closest(".element").remove();
+// }
+
+// const deleteButton = document.querySelector(".element__trash-button");
+// deleteButton.addEventListener("click", deleteCardHandler);

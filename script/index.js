@@ -1,3 +1,4 @@
+// Все комментарии в проекте это не просьба помощи у ревью, а скорее диалог с самим собой)
 const popup = document.querySelectorAll(".popup");
 const popupEdit = document.querySelector(".popup_type_edit");
 const popupAdd = document.querySelector(".popup_type_add");
@@ -7,9 +8,15 @@ const closeButton = document.querySelectorAll(".popup__close-button");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const popupName = document.querySelector(".popup__text-field_type_name");
+// ?Можно ли было сделать проще?
 const popupDescription = document.querySelector(
   ".popup__text-field_type_description"
 );
+const imageButten = document.querySelector(".element__img");
+const popupImage = document.querySelector(".popup__image");
+const popupCaption = document.querySelector(".popup__caption");
+const popupTypeZoom = document.querySelector(".popup_type_zoom");
+const elementText = document.querySelector(".element__text");
 
 // 1. Работа модальных окон. Открытие и закрытие модального окна
 
@@ -17,7 +24,7 @@ editButton.addEventListener("click", function () {
   popupEdit.classList.add("popup_opened");
 });
 
-// ? Можно ли было сделать проще?
+// ?Можно ли было сделать проще?
 
 function closePopup() {
   popup.forEach((item, index) => {
@@ -99,7 +106,7 @@ function createCards(cardName, cardImgLink) {
   cardElement.querySelector(".element__text").textContent = cardName;
   cardElement.querySelector(".element__img").src = cardImgLink;
   // Добавление лайков
-  // Почему такой странный перенос строк? Как исправить?
+  // ?Почему такой странный перенос строк? Как исправить?
   cardElement
     .querySelector(".element__heart")
     .addEventListener("click", function (evt) {
@@ -144,29 +151,3 @@ addNewPlace.addEventListener("click", function (evt) {
   createCards(placeName.value, placeLink.value);
   popupTypeAdd.classList.remove("popup_opened");
 });
-
-// 6. Удаление карточки
-//  Удаляет все карточки и только по нажатию на первую кнопку
-// ! Почему это работает в функции добавления карточек а здесь нет?
-
-// function deleteCardHandler(evt) {
-//   evt.target.closest(".element").remove();
-// }
-
-// const deleteButton = document.querySelector(".element__trash-button");
-// deleteButton.addEventListener("click", deleteCardHandler);
-
-const imageButten = document.querySelector(".element__img");
-const popupImage = document.querySelector(".popup__image");
-const popupCaption = document.querySelector(".popup__caption");
-const popupTypeZoom = document.querySelector(".popup_type_zoom");
-const elementText = document.querySelector(".element__text");
-
-// function zoomImageHandler(evt) {
-//   // evt.preventDefault();
-//   popupTypeZoom.classList.add("popup_opened");
-//   popupImage.src = imageButten.src;
-//   popupCaption.textContent = elementText.textContent;
-// }
-
-// imageButten.addEventListener("click", zoomImageHandler);

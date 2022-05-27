@@ -77,9 +77,7 @@
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
-
-  <!-- !Форма редактирования профиля -->
-
+  <!-- Форма редактирования профиля -->
   <div class="popup popup_type_edit">
     <div class="popup__container">
       <button class="popup__close-button" type="button" aria-label="Закрыть окно."></button>
@@ -94,22 +92,17 @@
       </form>
     </div>
   </div>
-
-  <!-- !Форма добавления фотографии -->
-
+  <!--Форма добавления фотографии -->
   <div class="popup popup_type_add">
     <div class="popup__container">
       <button class="popup__close-button" type="button" aria-label="Закрыть окно."></button>
       <form class="popup__form" name="profile-edit-form">
         <fieldset class="popup__fieldset">
           <h2 class="popup__title">Новое место</h2>
-          <!-- todo убрать testvalue -->
-          <input class="popup__text-field popup__text-field_type_place-name" type="text" placeholder="Название"
-            value="Чарские пески, Забайкалье" />
+
+          <input class="popup__text-field popup__text-field_type_place-name" type="text" placeholder="Название" />
           <input class="popup__text-field popup__text-field_type_place-link" type="text"
-            placeholder="Ссылка на картинку"
-            value="https://static.tildacdn.com/tild6237-3434-4061-b334-633431633834/05_charskie_peski.jpg" />
-          <!-- todo поменять класс кнопке -->
+            placeholder="Ссылка на картинку" />
           <button class="popup__save-button popup__save-button_type_img" type="click"
             aria-label="Создать.">Создать</button>
         </fieldset>
@@ -122,7 +115,7 @@
       <button class="popup__close-button" type="button" aria-label="Закрыть окно."></button>
       <figure class="popup__figure-image">
         <img src="#" alt="Большое фото" class="popup__image">
-        <figcaption class="popup__caption">Подпись для фото</figcaption>
+        <figcaption class="popup__caption"></figcaption>
       </figure>
     </div>
   </div>

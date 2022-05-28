@@ -1,12 +1,12 @@
 .profile__name-wrap {
   display: flex;
   margin-bottom: 16px;
-  align-self: center;
+  /* align-self: center; */
 }
 
 @media screen and (max-width: 700px) {
   .profile__name-wrap {
     margin-bottom: 10px;
-    margin-left: 30px;
+    /* margin-left: 30px; */
   }
 }

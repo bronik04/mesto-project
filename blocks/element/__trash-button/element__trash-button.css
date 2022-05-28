@@ -10,3 +10,7 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+.element__trash-button:hover {
+  background-image: url(../../../images/trash-hover.svg);
+}

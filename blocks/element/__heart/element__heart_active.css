@@ -3,5 +3,5 @@
 }
 
 .element__heart_active:hover {
-  background-image: url(../../../images/active-heart.svg);
+  background-image: url(../../../images/hover-heart.svg);
 }

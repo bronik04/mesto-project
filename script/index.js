@@ -1,4 +1,3 @@
-// Все комментарии в проекте это не просьба помощи у ревью, а скорее диалог с самим собой)
 const popup = document.querySelectorAll(".popup");
 const popupEdit = document.querySelector(".popup_type_edit");
 const popupAdd = document.querySelector(".popup_type_add");
@@ -8,94 +7,53 @@ const closeButton = document.querySelectorAll(".popup__close-button");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const popupName = document.querySelector(".popup__text-field_type_name");
-// ?Можно ли было сделать проще?
 const popupDescription = document.querySelector(
   ".popup__text-field_type_description"
 );
-const imageButten = document.querySelector(".element__img");
+const imageButton = document.querySelector(".element__img");
 const popupImage = document.querySelector(".popup__image");
 const popupCaption = document.querySelector(".popup__caption");
 const popupTypeZoom = document.querySelector(".popup_type_zoom");
 const elementText = document.querySelector(".element__text");
 
-// 1. Работа модальных окон. Открытие и закрытие модального окна
-
-editButton.addEventListener("click", function () {
-  popupEdit.classList.add("popup_opened");
-});
-
-// ?Можно ли было сделать проще?
-
-function closePopup() {
-  popup.forEach((item, index) => {
-    popup[index].classList.remove("popup_opened");
-  });
-}
-
-closeButton.forEach((item, index) => {
-  closeButton[index].addEventListener("click", closePopup);
-});
-
-popupName.value = profileName.textContent;
-popupDescription.value = profileDescription.textContent;
-
-// Редактирование имени и информации о себе
-
 const formElement = document.querySelector(".popup__form");
 const popupTypeEdit = document.querySelector(".popup_type_edit");
 
+// 1. Работа модальных окон. Открытие и закрытие модального окна
+
+// Функция открытия Popup
+function openPopup(popup) {
+  popup.classList.add("popup_opened");
+}
+// Функция закрытия Popup
+function closePopup(popup) {
+  popup.classList.remove("popup_opened");
+}
+// Функция открытия Popup профиль
+function openPropfilePopup() {
+  popupName.value = profileName.textContent;
+  popupDescription.value = profileDescription.textContent;
+  openPopup(popupEdit);
+}
+
+editButton.addEventListener("click", openPropfilePopup);
+
+closeButton.forEach((item) => {
+  item.addEventListener("click", () => closePopup(item.closest(".popup")));
+});
+
+// Редактирование имени и информации о себе
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = popupName.value;
   profileDescription.textContent = popupDescription.value;
-  popupTypeEdit.classList.remove("popup_opened");
-  // Можно было и так
-  //closePopup();
+  closePopup(popupEdit);
 }
 
 formElement.addEventListener("submit", formSubmitHandler);
 
 // 2. Шесть карточек «из коробки»
 // https://cuva.ru/blog/20-udivitelnyh-mest-rossii
-
-const initialCards = [
-  {
-    name: "Алмазная шахта «Мир», Якутия",
-    link: "https://static.tildacdn.com/tild6336-3238-4436-b966-313836346165/02_shachta_mir.jpg",
-  },
-  {
-    name: "Ординская пещера, Пермский край",
-    link: "https://static.tildacdn.com/tild3931-6539-4230-b733-383936376339/03_ordinskaya_pesher.jpg",
-  },
-  {
-    name: "Соловецкий монастырь, Архангельская область",
-    link: "https://static.tildacdn.com/tild6130-6139-4366-b034-383961383638/04_Solovki.jpg",
-  },
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
 
 let elements = document.querySelector(".elements");
 // Создаем новую карточку

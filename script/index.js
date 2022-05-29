@@ -131,3 +131,4 @@ function addSubmitHandler(evt) {
 }
 
 addNewPlace.addEventListener("submit", addSubmitHandler);
+// Сергей огромное Вам спасибо, Ваши замечания действительно делают мой код лучше!

@@ -49,6 +49,14 @@ function removeCard(evt) {
   evt.target.closest(".element").remove();
 }
 
+// Функция zoom карточки
+function handleCardClick(cardName, cardImgLink) {
+  openPopup(popupTypeZoom);
+  popupImage.src = cardImgLink;
+  popupCaption.textContent = cardName;
+  popupImage.alt = cardName;
+}
+
 // Функция открытия Popup профиль
 function openPropfilePopup() {
   popupName.value = profileName.textContent;
@@ -95,15 +103,9 @@ function createCards(cardName, cardImgLink) {
     .addEventListener("click", removeCard);
 
   // Зум карточки
-  // todo Разобраться в функции
-  function zoomCards() {
-    openPopup(popupTypeZoom);
-    popupImage.src = cardImgLink;
-    popupCaption.textContent = cardName;
-    popupImage.alt = cardName;
-  }
-
-  elementImage.addEventListener("click", zoomCards);
+  elementImage.addEventListener("click", () =>
+    handleCardClick(cardName, cardImgLink)
+  );
 
   return cardElement;
 }

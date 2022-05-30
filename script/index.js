@@ -2,8 +2,8 @@ const popupList = document.querySelectorAll(".popup");
 const popupEdit = document.querySelector(".popup_type_edit");
 const popupAdd = document.querySelector(".popup_type_add");
 const profileButton = document.querySelector(".profile__edit-button");
-const addButton = document.querySelector(".profile__add-button");
-const closeButton = document.querySelectorAll(".popup__close-button");
+const newPlaceButton = document.querySelector(".profile__add-button");
+const popupCloseButton = document.querySelectorAll(".popup__close-button");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const popupName = popupEdit.querySelector(".popup__text-field_type_name");
@@ -24,7 +24,7 @@ const cardsContainer = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#card-template").content;
 // переменные для добавления
 const popupTypeAdd = document.querySelector(".popup_type_add");
-const addNewPlace = document.querySelector(".popup__form_type_add-img");
+const formNewPlace = document.querySelector(".popup__form_type_add-img");
 const placeName = document.querySelector(".popup__text-field_type_place-name");
 const placeLink = document.querySelector(".popup__text-field_type_place-link");
 
@@ -58,7 +58,7 @@ function openPropfilePopup() {
 
 profileButton.addEventListener("click", openPropfilePopup);
 
-closeButton.forEach((item) => {
+popupCloseButton.forEach((item) => {
   item.addEventListener("click", () => closePopup(item.closest(".popup")));
 });
 
@@ -95,12 +95,15 @@ function createCards(cardName, cardImgLink) {
     .addEventListener("click", removeCard);
 
   // Зум карточки
-  elementImage.addEventListener("click", function () {
+  // todo Разобраться в функции
+  function zoomCards() {
     openPopup(popupTypeZoom);
     popupImage.src = cardImgLink;
     popupCaption.textContent = cardName;
     popupImage.alt = cardName;
-  });
+  }
+
+  elementImage.addEventListener("click", zoomCards);
 
   return cardElement;
 }
@@ -116,7 +119,7 @@ initialCards.forEach((item) => {
 
 // 3. Форма добавления карточки
 
-addButton.addEventListener("click", function () {
+newPlaceButton.addEventListener("click", function () {
   openPopup(popupAdd);
 });
 
@@ -125,10 +128,9 @@ addButton.addEventListener("click", function () {
 function addSubmitHandler(evt) {
   evt.preventDefault();
   renderCard(placeName.value, placeLink.value, cardsContainer);
-  placeName.value = "";
-  placeLink.value = "";
+  formNewPlace.reset();
   closePopup(popupTypeAdd);
 }
 
-addNewPlace.addEventListener("submit", addSubmitHandler);
+formNewPlace.addEventListener("submit", addSubmitHandler);
 // Сергей огромное Вам спасибо, Ваши замечания действительно делают мой код лучше!

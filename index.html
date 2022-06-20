@@ -3,28 +3,39 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./pages/index.css" />
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet"
+        href="./pages/index.css" />
   <title>Mesto</title>
 </head>
 
 <body class="page">
   <div class="page__contanier">
     <header class="header page__header">
-      <img class="logo" src="./images/logo.svg" alt="Логотип сайта Место.">
+      <img class="logo"
+           src="./images/logo.svg"
+           alt="Логотип сайта Место.">
     </header>
     <main class="content page__content">
       <section class="profile page__profile">
-        <img src="./images/avatar.jpg" alt="Аватар пользователя." class="profile__avatar" />
+        <img src="./images/avatar.jpg"
+             alt="Аватар пользователя."
+             class="profile__avatar" />
         <div class="profile__info">
           <div class="profile__name-wrap">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button" type="button" aria-label="Редактировать профиль."></button>
+            <button class="profile__edit-button"
+                    type="button"
+                    aria-label="Редактировать профиль."></button>
           </div>
           <p class="profile__description">Исследователь океана</p>
         </div>
-        <button class="profile__add-button" type="button" aria-label="Добавить фото."></button>
+        <button class="profile__add-button"
+                type="button"
+                aria-label="Добавить фото."></button>
       </section>
       <section class="gallery">
         <ul class="elements">
@@ -38,14 +49,23 @@
   <!-- Форма редактирования профиля -->
   <div class="popup popup_type_edit">
     <div class="popup__container">
-      <button class="popup__close-button" type="button" aria-label="Закрыть окно."></button>
-      <form class="popup__form popup__form_type_edit" name="profile-edit-form">
+      <button class="popup__close-button"
+              type="button"
+              aria-label="Закрыть окно."></button>
+      <form class="popup__form popup__form_type_edit"
+            name="profile-edit-form">
         <fieldset class="popup__fieldset">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input class="popup__text-field popup__text-field_type_name" type="text" name="name" value="Жак Кусто" />
-          <input class="popup__text-field popup__text-field_type_description" type="text" name="description" />
-          <button class="popup__save-button popup__save-button_type_edit" type="submit"
-            aria-label="Сохранить.">Сохранить</button>
+          <input class="popup__text-field popup__text-field_type_name"
+                 type="text"
+                 name="name"
+                 value="Жак Кусто" />
+          <input class="popup__text-field popup__text-field_type_description"
+                 type="text"
+                 name="description" />
+          <button class="popup__save-button popup__save-button_type_edit"
+                  type="submit"
+                  aria-label="Сохранить.">Сохранить</button>
         </fieldset>
       </form>
     </div>
@@ -53,16 +73,23 @@
   <!--Форма добавления фотографии -->
   <div class="popup popup_type_add">
     <div class="popup__container">
-      <button class="popup__close-button" type="button" aria-label="Закрыть окно."></button>
-      <form class="popup__form popup__form_type_add-img" name="profile-edit-form">
+      <button class="popup__close-button"
+              type="button"
+              aria-label="Закрыть окно."></button>
+      <form class="popup__form popup__form_type_add-img"
+            name="profile-edit-form">
         <fieldset class="popup__fieldset">
           <h2 class="popup__title">Новое место</h2>
 
-          <input class="popup__text-field popup__text-field_type_place-name" type="text" placeholder="Название" />
-          <input class="popup__text-field popup__text-field_type_place-link" type="text"
-            placeholder="Ссылка на картинку" />
-          <button class="popup__save-button popup__save-button_type_img" type="submit"
-            aria-label="Создать.">Создать</button>
+          <input class="popup__text-field popup__text-field_type_place-name"
+                 type="text"
+                 placeholder="Название" />
+          <input class="popup__text-field popup__text-field_type_place-link"
+                 type="text"
+                 placeholder="Ссылка на картинку" />
+          <button class="popup__save-button popup__save-button_type_img"
+                  type="submit"
+                  aria-label="Создать.">Создать</button>
         </fieldset>
       </form>
     </div>
@@ -70,9 +97,13 @@
   <!-- ! Попап для зум фото -->
   <div class="popup popup_type_zoom">
     <div class="popup__container">
-      <button class="popup__close-button" type="button" aria-label="Закрыть окно."></button>
+      <button class="popup__close-button"
+              type="button"
+              aria-label="Закрыть окно."></button>
       <figure class="popup__figure-image">
-        <img src="#" alt="Большое фото" class="popup__image">
+        <img src="#"
+             alt="Большое фото"
+             class="popup__image">
         <figcaption class="popup__caption"></figcaption>
       </figure>
     </div>
@@ -81,10 +112,14 @@
   <template id="card-template">
     <li class="element">
       <button class="element__trash-button"></button>
-      <img src="#" alt="Фото места" class="element__img" />
+      <img src="#"
+           alt="Фото места"
+           class="element__img" />
       <div class="element__wrap">
         <h2 class="element__text">Название места</h2>
-        <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
+        <button class="element__heart"
+                type="button"
+                aria-label="Поставить лайк"></button>
       </div>
     </li>
   </template>

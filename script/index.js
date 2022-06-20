@@ -1,4 +1,3 @@
-const popupList = document.querySelectorAll(".popup");
 const popupEdit = document.querySelector(".popup_type_edit");
 const popupAdd = document.querySelector(".popup_type_add");
 const profileButton = document.querySelector(".profile__edit-button");
@@ -10,14 +9,11 @@ const popupName = popupEdit.querySelector(".popup__text-field_type_name");
 const popupDescription = popupEdit.querySelector(
   ".popup__text-field_type_description"
 );
-const imageButton = document.querySelector(".element__img");
 const popupImage = document.querySelector(".popup__image");
 const popupCaption = document.querySelector(".popup__caption");
 const popupTypeZoom = document.querySelector(".popup_type_zoom");
-const elementText = document.querySelector(".element__text");
 
 const formElement = document.querySelector(".popup__form_type_edit");
-const popupTypeEdit = document.querySelector(".popup_type_edit");
 // Переиминовал переменную
 const cardsContainer = document.querySelector(".elements");
 // Вынес переменную из функции createCards
@@ -33,10 +29,30 @@ const placeLink = document.querySelector(".popup__text-field_type_place-link");
 // Функция открытия Popup
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", pressKeyHeandler);
 }
 // Функция закрытия Popup
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", pressKeyHeandler);
+}
+
+// Функция закрытия Popup по клику на Overlay
+function clickOverlayHendler(evt) {
+  if (evt.target.classList.contains("popup_opened")) {
+    closePopup(evt.target);
+  }
+}
+
+// Обработчик закрытия Popup по клику на Overlay
+document.addEventListener("click", clickOverlayHendler);
+
+// Функция закрытия Popup по клику на Esc
+function pressKeyHeandler(evt) {
+  const activePopup = document.querySelector(".popup_opened");
+  if (evt.key === "Escape") {
+    closePopup(activePopup);
+  }
 }
 
 // Функция добавления лайка
@@ -83,7 +99,7 @@ formElement.addEventListener("submit", formSubmitHandler);
 // 2. Шесть карточек «из коробки»
 // https://cuva.ru/blog/20-udivitelnyh-mest-rossii
 
-// Создаем новую карточку
+// !Создаем новую карточку
 function createCards(cardName, cardImgLink) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const elementImage = cardElement.querySelector(".element__img");
@@ -109,19 +125,20 @@ function createCards(cardName, cardImgLink) {
 
   return cardElement;
 }
+// ! Функция рендера карточек
 
 function renderCard(name, url, contanier) {
   const card = createCards(name, url);
   contanier.prepend(card);
 }
-
+/*global initialCards*/
 initialCards.forEach((item) => {
   renderCard(item.name, item.link, cardsContainer);
 });
 
 // 3. Форма добавления карточки
 
-newPlaceButton.addEventListener("click", function () {
+newPlaceButton.addEventListener("click", () => {
   openPopup(popupAdd);
 });
 
@@ -135,4 +152,3 @@ function addSubmitHandler(evt) {
 }
 
 formNewPlace.addEventListener("submit", addSubmitHandler);
-// Сергей огромное Вам спасибо, Ваши замечания действительно делают мой код лучше!

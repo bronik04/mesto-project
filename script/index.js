@@ -1,19 +1,21 @@
 const popupEdit = document.querySelector(".popup_type_edit");
+
 const popupAdd = document.querySelector(".popup_type_add");
 const profileButton = document.querySelector(".profile__edit-button");
 const newPlaceButton = document.querySelector(".profile__add-button");
 const popupCloseButton = document.querySelectorAll(".popup__close-button");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
-const popupName = popupEdit.querySelector(".popup__text-field_type_name");
+const popupName = popupEdit.querySelector(".popup__input_type_name");
 const popupDescription = popupEdit.querySelector(
-  ".popup__text-field_type_description"
+  ".popup__input_type_description"
 );
 const popupImage = document.querySelector(".popup__image");
 const popupCaption = document.querySelector(".popup__caption");
 const popupTypeZoom = document.querySelector(".popup_type_zoom");
 
-const formElement = document.querySelector(".popup__form_type_edit");
+// const formElement = document.querySelector(".popup__form_type_edit");
+const formElement = document.forms.profile_edit_form;
 // Переиминовал переменную
 const cardsContainer = document.querySelector(".elements");
 // Вынес переменную из функции createCards
@@ -21,8 +23,8 @@ const cardTemplate = document.querySelector("#card-template").content;
 // переменные для добавления
 const popupTypeAdd = document.querySelector(".popup_type_add");
 const formNewPlace = document.querySelector(".popup__form_type_add-img");
-const placeName = document.querySelector(".popup__text-field_type_place-name");
-const placeLink = document.querySelector(".popup__text-field_type_place-link");
+const placeName = document.querySelector(".popup__input_type_place-name");
+const placeLink = document.querySelector(".popup__input_type_place-link");
 
 // 1. Работа модальных окон. Открытие и закрытие модального окна
 
@@ -99,7 +101,7 @@ formElement.addEventListener("submit", formSubmitHandler);
 // 2. Шесть карточек «из коробки»
 // https://cuva.ru/blog/20-udivitelnyh-mest-rossii
 
-// !Создаем новую карточку
+// Создаем новую карточку
 function createCards(cardName, cardImgLink) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const elementImage = cardElement.querySelector(".element__img");

@@ -33,8 +33,17 @@ function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", pressKeyHeandler);
 }
+// Функция очистки полей ошибок
+function cleanErrorText() {
+  const errorList = document.querySelectorAll(".popup__error");
+  errorList.forEach((error) => {
+    error.textContent = "";
+  });
+}
+
 // Функция закрытия Popup
 function closePopup(popup) {
+  cleanErrorText();
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", pressKeyHeandler);
 }
@@ -127,7 +136,7 @@ function createCards(cardName, cardImgLink) {
 
   return cardElement;
 }
-// ! Функция рендера карточек
+// Функция рендера карточек
 
 function renderCard(name, url, contanier) {
   const card = createCards(name, url);

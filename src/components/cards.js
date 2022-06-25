@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const initialCards = [
   {
     name: "Алмазная шахта «Мир», Якутия",

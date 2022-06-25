@@ -41,8 +41,16 @@ function cleanErrorText() {
   });
 }
 
+function cleanErrorUnderline() {
+  const inputList = document.querySelectorAll(".popup__input");
+  inputList.forEach((inputElement) => {
+    inputElement.classList.remove("popup__input_type_error");
+  });
+}
+
 // Функция закрытия Popup
 function closePopup(popup) {
+  cleanErrorUnderline();
   cleanErrorText();
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", pressKeyHeandler);

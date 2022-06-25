@@ -31,7 +31,7 @@ const setEventListeners = (formElement, config) => {
   );
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
   // чтобы проверить состояние кнопки в самом начале
-  // toggleButtonState(inputList, buttonElement, config);
+  toggleButtonState(inputList, buttonElement, config);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {

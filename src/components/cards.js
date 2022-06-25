@@ -37,3 +37,70 @@ const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
+const cardsContainer = document.querySelector(".elements");
+const cardTemplate = document.querySelector("#card-template").content;
+const popupTypeAdd = document.querySelector(".popup_type_add");
+const placeName = document.querySelector(".popup__input_type_place-name");
+const placeLink = document.querySelector(".popup__input_type_place-link");
+const formNewPlace = document.querySelector(".popup__form_type_add-img");
+
+import { handleCardClick } from "./modal.js";
+import { closePopup } from "./utils.js";
+
+// Создаем новую карточку
+function createCards(cardName, cardImgLink) {
+  const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
+  const elementImage = cardElement.querySelector(".element__img");
+
+  cardElement.querySelector(".element__text").textContent = cardName;
+  elementImage.src = cardImgLink;
+  elementImage.alt = cardName;
+
+  // Добавление лайков
+  cardElement
+    .querySelector(".element__heart")
+    .addEventListener("click", addHeart);
+
+  // Удаление карточки
+  cardElement
+    .querySelector(".element__trash-button")
+    .addEventListener("click", removeCard);
+
+  // Зум карточки
+  elementImage.addEventListener("click", () =>
+    handleCardClick(cardName, cardImgLink)
+  );
+
+  return cardElement;
+}
+// Функция рендера карточек
+
+function renderCard(name, url, contanier) {
+  const card = createCards(name, url);
+  contanier.prepend(card);
+}
+
+initialCards.forEach((item) => {
+  renderCard(item.name, item.link, cardsContainer);
+});
+
+// Функция добавления лайка
+function addHeart(evt) {
+  evt.target.classList.toggle("element__heart_active");
+}
+
+// Функция удаления карточки
+function removeCard(evt) {
+  evt.target.closest(".element").remove();
+}
+
+// 4. Добавление карточки
+
+function addSubmitHandler(evt) {
+  evt.preventDefault();
+  renderCard(placeName.value, placeLink.value, cardsContainer);
+  formNewPlace.reset();
+  closePopup(popupTypeAdd);
+}
+
+export { addSubmitHandler, formNewPlace };

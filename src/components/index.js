@@ -1,103 +1,27 @@
-const popupEdit = document.querySelector(".popup_type_edit");
-
 const popupAdd = document.querySelector(".popup_type_add");
 const profileButton = document.querySelector(".profile__edit-button");
 const newPlaceButton = document.querySelector(".profile__add-button");
 const popupCloseButton = document.querySelectorAll(".popup__close-button");
-const profileName = document.querySelector(".profile__name");
-const profileDescription = document.querySelector(".profile__description");
-const popupName = popupEdit.querySelector(".popup__input_type_name");
-const popupDescription = popupEdit.querySelector(
-  ".popup__input_type_description"
-);
-const popupImage = document.querySelector(".popup__image");
-const popupCaption = document.querySelector(".popup__caption");
-const popupTypeZoom = document.querySelector(".popup_type_zoom");
 
-// const formElement = document.querySelector(".popup__form_type_edit");
-const formElement = document.forms.profile_edit_form;
-// Переиминовал переменную
-const cardsContainer = document.querySelector(".elements");
-// Вынес переменную из функции createCards
-const cardTemplate = document.querySelector("#card-template").content;
-// переменные для добавления
-const popupTypeAdd = document.querySelector(".popup_type_add");
-const formNewPlace = document.querySelector(".popup__form_type_add-img");
-const placeName = document.querySelector(".popup__input_type_place-name");
-const placeLink = document.querySelector(".popup__input_type_place-link");
+const formElement = document.querySelector(".popup__form_type_edit");
+// const formElement = document.forms.profile_edit_form;
+// Импорты
+import { enableValidation } from "./validate.js";
+import { openPopup, closePopup, clickOverlayHendler } from "./utils.js";
+import { addSubmitHandler, formNewPlace } from "./cards.js";
+import { openPropfilePopup, formSubmitHandler } from "./modal.js";
 
-// 1. Работа модальных окон. Открытие и закрытие модального окна
-
-// Функция открытия Popup
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", pressKeyHeandler);
-}
-// Функция очистки полей ошибок
-function cleanErrorText() {
-  const errorList = document.querySelectorAll(".popup__error");
-  errorList.forEach((error) => {
-    error.textContent = "";
-  });
-}
-
-function cleanErrorUnderline() {
-  const inputList = document.querySelectorAll(".popup__input");
-  inputList.forEach((inputElement) => {
-    inputElement.classList.remove("popup__input_type_error");
-  });
-}
-
-// Функция закрытия Popup
-function closePopup(popup) {
-  cleanErrorUnderline();
-  cleanErrorText();
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", pressKeyHeandler);
-}
-
-// Функция закрытия Popup по клику на Overlay
-function clickOverlayHendler(evt) {
-  if (evt.target.classList.contains("popup_opened")) {
-    closePopup(evt.target);
-  }
-}
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+});
 
 // Обработчик закрытия Popup по клику на Overlay
 document.addEventListener("click", clickOverlayHendler);
-
-// Функция закрытия Popup по клику на Esc
-function pressKeyHeandler(evt) {
-  const activePopup = document.querySelector(".popup_opened");
-  if (evt.key === "Escape") {
-    closePopup(activePopup);
-  }
-}
-
-// Функция добавления лайка
-function addHeart(evt) {
-  evt.target.classList.toggle("element__heart_active");
-}
-
-// Функция удаления карточки
-function removeCard(evt) {
-  evt.target.closest(".element").remove();
-}
-
-// Функция zoom карточки
-function handleCardClick(cardName, cardImgLink) {
-  openPopup(popupTypeZoom);
-  popupImage.src = cardImgLink;
-  popupCaption.textContent = cardName;
-  popupImage.alt = cardName;
-}
-
-// Функция открытия Popup профиль
-function openPropfilePopup() {
-  popupName.value = profileName.textContent;
-  popupDescription.value = profileDescription.textContent;
-  openPopup(popupEdit);
-}
 
 profileButton.addEventListener("click", openPropfilePopup);
 
@@ -105,69 +29,12 @@ popupCloseButton.forEach((item) => {
   item.addEventListener("click", () => closePopup(item.closest(".popup")));
 });
 
-// Редактирование имени и информации о себе
-function formSubmitHandler(evt) {
-  evt.preventDefault();
-  profileName.textContent = popupName.value;
-  profileDescription.textContent = popupDescription.value;
-  closePopup(popupEdit);
-}
-
 formElement.addEventListener("submit", formSubmitHandler);
-
-// 2. Шесть карточек «из коробки»
-// https://cuva.ru/blog/20-udivitelnyh-mest-rossii
-
-// Создаем новую карточку
-function createCards(cardName, cardImgLink) {
-  const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
-  const elementImage = cardElement.querySelector(".element__img");
-
-  cardElement.querySelector(".element__text").textContent = cardName;
-  elementImage.src = cardImgLink;
-  elementImage.alt = cardName;
-
-  // Добавление лайков
-  cardElement
-    .querySelector(".element__heart")
-    .addEventListener("click", addHeart);
-
-  // Удаление карточки
-  cardElement
-    .querySelector(".element__trash-button")
-    .addEventListener("click", removeCard);
-
-  // Зум карточки
-  elementImage.addEventListener("click", () =>
-    handleCardClick(cardName, cardImgLink)
-  );
-
-  return cardElement;
-}
-// Функция рендера карточек
-
-function renderCard(name, url, contanier) {
-  const card = createCards(name, url);
-  contanier.prepend(card);
-}
-/*global initialCards*/
-initialCards.forEach((item) => {
-  renderCard(item.name, item.link, cardsContainer);
-});
 
 // 3. Форма добавления карточки
 
 newPlaceButton.addEventListener("click", () => {
   openPopup(popupAdd);
 });
-
-// 4. Добавление карточки
-
-function addSubmitHandler(evt) {
-  evt.preventDefault();
-  renderCard(placeName.value, placeLink.value, cardsContainer);
-  formNewPlace.reset();
-  closePopup(popupTypeAdd);
-}
 
 formNewPlace.addEventListener("submit", addSubmitHandler);

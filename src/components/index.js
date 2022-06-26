@@ -6,6 +6,7 @@ const popupCloseButton = document.querySelectorAll(".popup__close-button");
 const formElement = document.querySelector(".popup__form_type_edit");
 // const formElement = document.forms.profile_edit_form;
 // Импорты
+import "../pages/index.css";
 import { enableValidation } from "./validate.js";
 import { openPopup, closePopup, clickOverlayHendler } from "./utils.js";
 import { addSubmitHandler, formNewPlace } from "./cards.js";

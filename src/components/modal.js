@@ -1,5 +1,11 @@
 // Функция zoom карточки
-import { openPopup, closePopup } from "./utils.js";
+import {
+  openPopup,
+  closePopup,
+  cleanErrorUnderline,
+  cleanErrorText,
+  handleActiveButton,
+} from "./utils.js";
 
 // const popups = {
 //   popupImageSelector: ".popup__image",
@@ -30,14 +36,17 @@ function openPropfilePopup() {
   popupName.value = profileName.textContent;
   popupDescription.value = profileDescription.textContent;
   openPopup(popupEdit);
+  cleanErrorUnderline();
+  cleanErrorText();
 }
 
 // Редактирование имени и информации о себе
-function formSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = popupName.value;
   profileDescription.textContent = popupDescription.value;
   closePopup(popupEdit);
+  handleActiveButton();
 }
 
-export { handleCardClick, openPropfilePopup, formSubmitHandler };
+export { handleCardClick, openPropfilePopup, handleProfileFormSubmit };

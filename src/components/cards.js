@@ -45,7 +45,7 @@ const placeLink = document.querySelector(".popup__input_type_place-link");
 const formNewPlace = document.querySelector(".popup__form_type_add-img");
 
 import { handleCardClick } from "./modal.js";
-import { closePopup } from "./utils.js";
+import { closePopup, handleActiveButton } from "./utils.js";
 
 // Создаем новую карточку
 function createCards(cardName, cardImgLink) {
@@ -59,7 +59,7 @@ function createCards(cardName, cardImgLink) {
   // Добавление лайков
   cardElement
     .querySelector(".element__heart")
-    .addEventListener("click", addHeart);
+    .addEventListener("click", toggleLike);
 
   // Удаление карточки
   cardElement
@@ -85,7 +85,7 @@ initialCards.forEach((item) => {
 });
 
 // Функция добавления лайка
-function addHeart(evt) {
+function toggleLike(evt) {
   evt.target.classList.toggle("element__heart_active");
 }
 
@@ -96,11 +96,12 @@ function removeCard(evt) {
 
 // 4. Добавление карточки
 
-function addSubmitHandler(evt) {
+function handleNewPlaceFormSubmit(evt) {
   evt.preventDefault();
   renderCard(placeName.value, placeLink.value, cardsContainer);
   formNewPlace.reset();
   closePopup(popupTypeAdd);
+  handleActiveButton();
 }
 
-export { addSubmitHandler, formNewPlace };
+export { handleNewPlaceFormSubmit, formNewPlace };

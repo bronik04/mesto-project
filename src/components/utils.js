@@ -36,12 +36,9 @@ export function cleanErrorUnderline() {
   });
 }
 
-export function handleActiveButton() {
-  const buttonList = document.querySelectorAll(".popup__button");
-  buttonList.forEach((buttonElement) => {
-    buttonElement.classList.add("popup__button_disabled");
-    buttonElement.disabled = true;
-  });
+export function disableButton(buttonElement) {
+  buttonElement.classList.add("popup__button_disabled");
+  buttonElement.disabled = true;
 }
 
 // Функция закрытия Popup по клику на Overlay

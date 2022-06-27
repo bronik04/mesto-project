@@ -1,6 +1,6 @@
 const popupAdd = document.querySelector(".popup_type_add");
 const profileButton = document.querySelector(".profile__edit-button");
-const newPlaceButton = document.querySelector(".profile__add-button");
+export const newPlaceButton = document.querySelector(".profile__add-button");
 const popupCloseButton = document.querySelectorAll(".popup__close-button");
 const profileForm = document.querySelector(".popup__form_type_edit");
 // Импорты

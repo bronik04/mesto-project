@@ -45,7 +45,7 @@ const placeLink = document.querySelector(".popup__input_type_place-link");
 const formNewPlace = document.querySelector(".popup__form_type_add-img");
 
 import { handleCardClick } from "./modal.js";
-import { closePopup, handleActiveButton } from "./utils.js";
+import { closePopup, disableButton } from "./utils.js";
 
 // Создаем новую карточку
 function createCards(cardName, cardImgLink) {
@@ -101,7 +101,10 @@ function handleNewPlaceFormSubmit(evt) {
   renderCard(placeName.value, placeLink.value, cardsContainer);
   formNewPlace.reset();
   closePopup(popupTypeAdd);
-  handleActiveButton();
+  const newPlaceSubmitButton = document.querySelector(
+    ".popup__button_type_img"
+  );
+  disableButton(newPlaceSubmitButton);
 }
 
 export { handleNewPlaceFormSubmit, formNewPlace };

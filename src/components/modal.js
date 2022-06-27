@@ -4,7 +4,6 @@ import {
   closePopup,
   cleanErrorUnderline,
   cleanErrorText,
-  handleActiveButton,
 } from "./utils.js";
 
 // const popups = {
@@ -46,7 +45,6 @@ function handleProfileFormSubmit(evt) {
   profileName.textContent = popupName.value;
   profileDescription.textContent = popupDescription.value;
   closePopup(popupEdit);
-  handleActiveButton();
 }
 
 export { handleCardClick, openPropfilePopup, handleProfileFormSubmit };

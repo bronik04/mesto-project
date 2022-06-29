@@ -2,7 +2,6 @@
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", handleEscapeKey);
-  // Обработчик закрытия Popup по клику на Overlay
   document.addEventListener("click", handleOverlay);
 }
 

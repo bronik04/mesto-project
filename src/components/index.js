@@ -9,6 +9,7 @@ import { enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./utils.js";
 import { handleNewPlaceFormSubmit, formNewPlace } from "./cards.js";
 import { openPropfilePopup, handleProfileFormSubmit } from "./modal.js";
+import { getUser } from "./api.js";
 
 enableValidation({
   formSelector: ".popup__form",
@@ -34,3 +35,5 @@ newPlaceButton.addEventListener("click", () => {
 });
 
 formNewPlace.addEventListener("submit", handleNewPlaceFormSubmit);
+
+getUser();

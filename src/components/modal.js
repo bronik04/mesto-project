@@ -12,8 +12,11 @@ import {
 //   popupTypeZoomSelector: ".popup_type_zoom",
 // };
 
-const profileName = document.querySelector(".profile__name");
-const profileDescription = document.querySelector(".profile__description");
+export const profileName = document.querySelector(".profile__name");
+export const profileDescription = document.querySelector(
+  ".profile__description"
+);
+export const prifileAvatar = document.querySelector(".prpfile__avatar");
 const popupImage = document.querySelector(".popup__image");
 const popupCaption = document.querySelector(".popup__caption");
 const popupTypeZoom = document.querySelector(".popup_type_zoom");

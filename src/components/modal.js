@@ -16,13 +16,12 @@ export const profileName = document.querySelector(".profile__name");
 export const profileDescription = document.querySelector(
   ".profile__description"
 );
-export const prifileAvatar = document.querySelector(".prpfile__avatar");
 const popupImage = document.querySelector(".popup__image");
 const popupCaption = document.querySelector(".popup__caption");
 const popupTypeZoom = document.querySelector(".popup_type_zoom");
 const popupEdit = document.querySelector(".popup_type_edit");
-const popupName = popupEdit.querySelector(".popup__input_type_name");
-const popupDescription = popupEdit.querySelector(
+export const popupName = popupEdit.querySelector(".popup__input_type_name");
+export const popupDescription = popupEdit.querySelector(
   ".popup__input_type_description"
 );
 

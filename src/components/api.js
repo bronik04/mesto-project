@@ -1,4 +1,7 @@
-import { profileName, profileDescription, prifileAvatar } from "./modal.js";
+import { data } from "autoprefixer";
+
+import { placeName, placeLink } from "./cards.js";
+import { popupName, popupDescription } from "./modal.js";
 
 const config = {
   baseUrl: "https://mesto.nomoreparties.co/v1/plus-cohort-13",
@@ -8,7 +11,7 @@ const config = {
   },
 };
 
-const onFulfilled = (res) => {
+export const onResponce = (res) => {
   if (res.ok) {
     return res.json();
   }
@@ -18,20 +21,35 @@ const onFulfilled = (res) => {
 export const getUser = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers,
-  })
-    .then(onFulfilled)
-    .then((data) => {
-      console.log(data);
-      profileName.textContent = data.name;
-      profileDescription.textContent = data.about;
-      prifileAvatar.src = data.avatar;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  }).then(onResponce);
 };
 
-// export const getInitialCards = () => {
-//   return fetch("", {});
-//   // ...
-// };
+
+export const editProfile = (data) => {
+  return fetch(`${config.baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: config.headers,
+    body: JSON.stringify(data),
+  }).then(onResponce);
+};
+
+export const getInitialCards = () => {
+  return fetch(`${config.baseUrl}/cards`, {
+    headers: config.headers,
+  }).then(onResponce);
+};
+
+export const addCards = (data) => {
+  return fetch(`${config.baseUrl}/cards`, {
+    method: "POST",
+    headers: config.headers,
+    body: JSON.stringify(data),
+  }).then(onResponce);
+};
+
+export const deleteCards = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
+    method: "DELETE",
+    headers: config.headers,
+  }).then(onResponce);
+};

@@ -3,13 +3,29 @@ const profileButton = document.querySelector(".profile__edit-button");
 export const newPlaceButton = document.querySelector(".profile__add-button");
 const popupCloseButton = document.querySelectorAll(".popup__close-button");
 const profileForm = document.querySelector(".popup__form_type_edit");
+const prifileAvatar = document.querySelector(".profile__avatar");
 // Импорты
 import "../pages/index.css";
 import { enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./utils.js";
-import { handleNewPlaceFormSubmit, formNewPlace } from "./cards.js";
-import { openPropfilePopup, handleProfileFormSubmit } from "./modal.js";
-import { getUser } from "./api.js";
+import {
+  handleNewPlaceFormSubmit,
+  formNewPlace,
+  placeName,
+  placeLink,
+  renderCard,
+  cardsContainer,
+} from "./cards.js";
+
+import {
+  openPropfilePopup,
+  handleProfileFormSubmit,
+  profileName,
+  profileDescription,
+} from "./modal.js";
+
+import { getUser, getInitialCards, editProfile, addCards } from "./api.js";
+import { data } from "autoprefixer";
 
 enableValidation({
   formSelector: ".popup__form",
@@ -35,5 +51,37 @@ newPlaceButton.addEventListener("click", () => {
 });
 
 formNewPlace.addEventListener("submit", handleNewPlaceFormSubmit);
+// Получаем данные пользователя
+getUser()
+  .then((data) => {
+    profileName.textContent = data.name;
+    profileDescription.textContent = data.about;
+    prifileAvatar.src = data.avatar;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
-getUser();
+const nameObj = {
+  name: "Marie Skłodowska Curie",
+  about: "Physicist and Chemist",
+};
+
+// Редактируем данные пользователя
+editProfile(nameObj).then((data) => {
+  console.log(data);
+});
+
+// Получаем карточки
+getInitialCards()
+  .then((initialCards) => {
+    initialCards.forEach((card) => {
+      console.log(card);
+      renderCard(card.name, card.link, cardsContainer);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+// addCards().then();

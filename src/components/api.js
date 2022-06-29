@@ -39,11 +39,11 @@ export const getInitialCards = () => {
   }).then(onResponce);
 };
 
-export const addCards = (data) => {
+export const addCards = (inputData) => {
   return fetch(`${config.baseUrl}/cards`, {
     method: "POST",
     headers: config.headers,
-    body: JSON.stringify(data),
+    body: JSON.stringify(inputData)
   }).then(onResponce);
 };
 

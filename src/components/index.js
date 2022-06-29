@@ -11,10 +11,6 @@ import { openPopup, closePopup } from "./utils.js";
 import {
   handleNewPlaceFormSubmit,
   formNewPlace,
-  placeName,
-  placeLink,
-  renderCard,
-  cardsContainer,
 } from "./cards.js";
 
 import {
@@ -24,8 +20,7 @@ import {
   profileDescription,
 } from "./modal.js";
 
-import { getUser, getInitialCards, editProfile, addCards } from "./api.js";
-import { data } from "autoprefixer";
+import { getUser, editProfile } from "./api.js";
 
 enableValidation({
   formSelector: ".popup__form",
@@ -71,17 +66,5 @@ const nameObj = {
 editProfile(nameObj).then((data) => {
   console.log(data);
 });
-
-// Получаем карточки
-getInitialCards()
-  .then((initialCards) => {
-    initialCards.forEach((card) => {
-      console.log(card);
-      renderCard(card.name, card.link, cardsContainer);
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
 // addCards().then();

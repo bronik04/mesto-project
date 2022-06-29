@@ -51,16 +51,18 @@ const formNewPlace = document.querySelector(".popup__form_type_add-img");
 import { deleteCards } from "./api.js";
 import { handleCardClick } from "./modal.js";
 import { closePopup, disableButton } from "./utils.js";
+import { getUser, getInitialCards, editProfile, addCards } from "./api.js";
+import { data } from "autoprefixer";
 
 // Создаем новую карточку
 
-function createCards(cardName, cardImgLink) {
+function createCards(card) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const elementImage = cardElement.querySelector(".element__img");
 
-  cardElement.querySelector(".element__text").textContent = cardName;
-  elementImage.src = cardImgLink;
-  elementImage.alt = cardName;
+  cardElement.querySelector(".element__text").textContent = card.name;
+  elementImage.src = card.link;
+  elementImage.alt = card.name;
 
   // Добавление лайков
   cardElement
@@ -74,43 +76,65 @@ function createCards(cardName, cardImgLink) {
 
   // Зум карточки
   elementImage.addEventListener("click", () =>
-    handleCardClick(cardName, cardImgLink)
+    handleCardClick(card.name, card.link)
   );
-
   return cardElement;
 }
 // Функция рендера карточек
 
-export function renderCard(name, url, contanier) {
-  const card = createCards(name, url);
-  contanier.prepend(card);
+export function renderCard(cardElement, contanier) {
+  // const card = createCards(cardElement);
+  contanier.prepend(createCards(cardElement));
 }
+
+// Получаем карточки
+getInitialCards()
+  .then((initialCards) => {
+    initialCards.forEach((card) => {
+      renderCard(card, cardsContainer);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // Функция добавления лайка
 function toggleLike(evt) {
   evt.target.classList.toggle("element__heart_active");
 }
 
+// 4. Добавление новой карточки
+
+function handleNewPlaceFormSubmit(evt) {
+  const inputElement = {
+    name: placeName.value,
+    link: placeLink.value,
+  }
+  evt.preventDefault();
+  const newPlaceSubmitButton = document.querySelector(
+    ".popup__button_type_img"
+  );
+  disableButton(newPlaceSubmitButton);
+
+  addCards(inputElement)
+    .then((cardData) => {
+      renderCard(cardData, cardsContainer);
+    })
+    .catch(err => console.log(err))
+
+  // renderCard(inputElement, cardsContainer);
+  formNewPlace.reset();
+  closePopup(popupTypeAdd);
+}
+
 // Функция удаления карточки
 function removeCard(evt) {
+  // todo Понять где взять ID
   deleteCards()
     .then(() => {
       evt.target.closest(".element").remove();
     })
     .catch((err) => console.log(err));
-}
-
-// 4. Добавление карточки
-
-function handleNewPlaceFormSubmit(evt) {
-  evt.preventDefault();
-  renderCard(placeName.value, placeLink.value, cardsContainer);
-  formNewPlace.reset();
-  closePopup(popupTypeAdd);
-  const newPlaceSubmitButton = document.querySelector(
-    ".popup__button_type_img"
-  );
-  disableButton(newPlaceSubmitButton);
 }
 
 export { handleNewPlaceFormSubmit, formNewPlace };

@@ -25,11 +25,11 @@ export const getUser = () => {
 };
 
 
-export const editProfile = (data) => {
+export const editProfile = (editData) => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "PATCH",
     headers: config.headers,
-    body: JSON.stringify(data),
+    body: JSON.stringify(editData)
   }).then(onResponce);
 };
 

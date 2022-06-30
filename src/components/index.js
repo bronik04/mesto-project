@@ -20,7 +20,8 @@ import {
   profileDescription,
 } from "./modal.js";
 
-import { getUser, editProfile } from "./api.js";
+import { getUser } from "./api";
+
 
 enableValidation({
   formSelector: ".popup__form",
@@ -56,15 +57,5 @@ getUser()
   .catch((err) => {
     console.log(err);
   });
-
-const nameObj = {
-  name: "Marie Skłodowska Curie",
-  about: "Physicist and Chemist",
-};
-
-// Редактируем данные пользователя
-editProfile(nameObj).then((data) => {
-  console.log(data);
-});
 
 // addCards().then();

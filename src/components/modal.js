@@ -6,11 +6,7 @@ import {
   cleanErrorText,
 } from "./utils.js";
 
-// const popups = {
-//   popupImageSelector: ".popup__image",
-//   popupCaptionSelector: ".popup__caption",
-//   popupTypeZoomSelector: ".popup_type_zoom",
-// };
+import { editProfile } from "./api.js";
 
 export const profileName = document.querySelector(".profile__name");
 export const profileDescription = document.querySelector(
@@ -44,9 +40,13 @@ function openPropfilePopup() {
 // Редактирование имени и информации о себе
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = popupName.value;
-  profileDescription.textContent = popupDescription.value;
-  closePopup(popupEdit);
+
+  editProfile({ name: popupName.value, about: popupDescription.value })
+    .then((data) => {
+      profileName.textContent = data.name;
+      profileDescription.textContent = data.about;
+      closePopup(popupEdit);
+    });
 }
 
 export { handleCardClick, openPropfilePopup, handleProfileFormSubmit };

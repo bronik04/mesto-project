@@ -72,7 +72,15 @@ function createCards(card) {
   // Удаление карточки
   cardElement
     .querySelector(".element__trash-button")
-    .addEventListener("click", removeCard);
+    .addEventListener("click", (evt) => {
+      deleteCards(card._id)
+        .then(() => {
+          evt.target.closest(".element").remove();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
 
   // Зум карточки
   elementImage.addEventListener("click", () =>
@@ -83,7 +91,6 @@ function createCards(card) {
 // Функция рендера карточек
 
 export function renderCard(cardElement, contanier) {
-  // const card = createCards(cardElement);
   contanier.prepend(createCards(cardElement));
 }
 
@@ -110,11 +117,6 @@ function handleNewPlaceFormSubmit(evt) {
     name: placeName.value,
     link: placeLink.value,
   }
-  evt.preventDefault();
-  const newPlaceSubmitButton = document.querySelector(
-    ".popup__button_type_img"
-  );
-  disableButton(newPlaceSubmitButton);
 
   addCards(inputElement)
     .then((cardData) => {
@@ -122,19 +124,31 @@ function handleNewPlaceFormSubmit(evt) {
     })
     .catch(err => console.log(err))
 
+
+
+  evt.preventDefault();
+  const newPlaceSubmitButton = document
+    .querySelector(".popup__button_type_img");
+  disableButton(newPlaceSubmitButton);
+
+
+
   // renderCard(inputElement, cardsContainer);
   formNewPlace.reset();
   closePopup(popupTypeAdd);
 }
 
 // Функция удаления карточки
-function removeCard(evt) {
-  // todo Понять где взять ID
-  deleteCards()
-    .then(() => {
-      evt.target.closest(".element").remove();
-    })
-    .catch((err) => console.log(err));
-}
+// todo Спросить как получить _id в таком случае?
+// function removeCard(evt) {
+//   console.log(card._id);
+//   deleteCards(card._id)
+//     .then((initialCards) => {
+//       evt.target.closest(".element").remove();
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }
 
 export { handleNewPlaceFormSubmit, formNewPlace };

@@ -131,9 +131,6 @@ function handleNewPlaceFormSubmit(evt) {
     .querySelector(".popup__button_type_img");
   disableButton(newPlaceSubmitButton);
 
-
-
-  // renderCard(inputElement, cardsContainer);
   formNewPlace.reset();
   closePopup(popupTypeAdd);
 }

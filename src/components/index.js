@@ -3,7 +3,7 @@ const profileButton = document.querySelector(".profile__edit-button");
 export const newPlaceButton = document.querySelector(".profile__add-button");
 const popupCloseButton = document.querySelectorAll(".popup__close-button");
 const profileForm = document.querySelector(".popup__form_type_edit");
-const prifileAvatar = document.querySelector(".profile__avatar");
+
 // Импорты
 import "../pages/index.css";
 import { enableValidation } from "./validate.js";
@@ -18,6 +18,7 @@ import {
   handleProfileFormSubmit,
   profileName,
   profileDescription,
+  profileAvatar,
 } from "./modal.js";
 
 import { getUser } from "./api";
@@ -52,10 +53,10 @@ getUser()
   .then((data) => {
     profileName.textContent = data.name;
     profileDescription.textContent = data.about;
-    prifileAvatar.src = data.avatar;
+    profileAvatar.src = data.avatar;
   })
   .catch((err) => {
     console.log(err);
   });
 
-// addCards().then();
+

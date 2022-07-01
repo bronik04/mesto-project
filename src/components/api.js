@@ -33,6 +33,15 @@ export const editProfile = (editData) => {
   }).then(onResponce);
 };
 
+export const editAvatar = (editData) => {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    method: "PATCH",
+    headers: config.headers,
+    body: JSON.stringify(editData)
+  }).then(onResponce);
+};
+
+
 export const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,

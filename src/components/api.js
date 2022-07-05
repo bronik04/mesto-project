@@ -1,8 +1,3 @@
-import { data } from "autoprefixer";
-
-import { placeName, placeLink } from "./cards.js";
-import { popupName, popupDescription } from "./modal.js";
-
 const config = {
   baseUrl: "https://mesto.nomoreparties.co/v1/plus-cohort-13",
   headers: {
@@ -11,7 +6,7 @@ const config = {
   },
 };
 
-export const onResponce = (res) => {
+export const onResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
@@ -21,16 +16,15 @@ export const onResponce = (res) => {
 export const getUser = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers,
-  }).then(onResponce);
+  }).then(onResponse);
 };
-
 
 export const editProfile = (editData) => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify(editData)
-  }).then(onResponce);
+  }).then(onResponse);
 };
 
 export const editAvatar = (editData) => {
@@ -38,14 +32,14 @@ export const editAvatar = (editData) => {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify(editData)
-  }).then(onResponce);
+  }).then(onResponse);
 };
 
 
 export const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
-  }).then(onResponce);
+  }).then(onResponse);
 };
 
 export const addCards = (inputData) => {
@@ -53,12 +47,26 @@ export const addCards = (inputData) => {
     method: "POST",
     headers: config.headers,
     body: JSON.stringify(inputData)
-  }).then(onResponce);
+  }).then(onResponse);
 };
 
 export const deleteCards = (cardId) => {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
-  }).then(onResponce);
+  }).then(onResponse);
+};
+
+export const addLike = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: "PUT",
+    headers: config.headers,
+  }).then(onResponse);
+};
+
+export const removeLike = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: "DELETE",
+    headers: config.headers,
+  }).then(onResponse);
 };

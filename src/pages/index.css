@@ -46,3 +46,5 @@
 @import url(../blocks/popup/__field/popup__field.css);
 /* @import url(../blocks/popup/__button/popup__button_disabled.css); */
 @import url(../blocks/profile/__avatar-button/profile__avatar-button.css);
+@import url(../blocks/element/__heart-wrap/element__heart-wrap.css);
+@import url(../blocks/element/__heart-counter/element__heart-counter.css);

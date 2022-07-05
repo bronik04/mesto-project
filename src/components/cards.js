@@ -40,23 +40,19 @@
 export const cardsContainer = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#card-template").content;
 const popupTypeAdd = document.querySelector(".popup_type_add");
-export const placeName = document.querySelector(
-  ".popup__input_type_place-name"
-);
-export const placeLink = document.querySelector(
-  ".popup__input_type_place-link"
-);
+export const placeName = document
+  .querySelector(".popup__input_type_place-name");
+export const placeLink = document
+  .querySelector(".popup__input_type_place-link");
 const formNewPlace = document.querySelector(".popup__form_type_add-img");
 
-import { deleteCards } from "./api.js";
+import { addLike, deleteCards, removeLike, addCards } from "./api.js";
 import { handleCardClick } from "./modal.js";
 import { closePopup, disableButton } from "./utils.js";
-import { getUser, getInitialCards, editProfile, addCards } from "./api.js";
-import { data } from "autoprefixer";
 
 // Создаем новую карточку
 
-function createCards(card) {
+function createCards(card, userId) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const elementImage = cardElement.querySelector(".element__img");
 
@@ -65,22 +61,59 @@ function createCards(card) {
   elementImage.alt = card.name;
 
   // Добавление лайков
-  cardElement
-    .querySelector(".element__heart")
-    .addEventListener("click", toggleLike);
 
-  // Удаление карточки
-  cardElement
-    .querySelector(".element__trash-button")
-    .addEventListener("click", (evt) => {
-      deleteCards(card._id)
-        .then(() => {
-          evt.target.closest(".element").remove();
+  const likesNumber = cardElement.querySelector(".element__heart-counter");
+  const likeButton = cardElement.querySelector(".element__heart");
+
+  if (card.likes.find((item) => {
+    return userId === item._id;
+  })) {
+    likeButton.classList.add("element__heart_active");
+  }
+
+  likesNumber.textContent = card.likes.length;
+
+  likeButton.addEventListener("click", (evt) => {
+
+    if (!evt.target.classList.contains("element__heart_active")) {
+      addLike(card._id)
+        .then((data) => {
+          evt.target.classList.toggle("element__heart_active");
+          likesNumber.textContent = data.likes.length;
         })
         .catch((err) => {
           console.log(err);
         });
-    });
+
+    } else {
+      removeLike(card._id)
+        .then((data) => {
+          evt.target.classList.toggle("element__heart_active");
+          likesNumber.textContent = data.likes.length;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+  });
+
+  const deleteButton = cardElement.querySelector(".element__trash-button");
+  if (card.owner._id === userId) {
+    deleteButton.style.display = "block";
+  }
+
+
+  // Удаление карточки
+  deleteButton.addEventListener("click", (evt) => {
+    deleteCards(card._id)
+      .then(() => {
+        evt.target.closest(".element").remove();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 
   // Зум карточки
   elementImage.addEventListener("click", () =>
@@ -90,25 +123,25 @@ function createCards(card) {
 }
 // Функция рендера карточек
 
-export function renderCard(cardElement, contanier) {
-  contanier.prepend(createCards(cardElement));
+export function renderCard(cardElement, container, userId) {
+  container.prepend(createCards(cardElement, userId));
 }
 
-// Получаем карточки
-getInitialCards()
-  .then((initialCards) => {
-    initialCards.forEach((card) => {
-      renderCard(card, cardsContainer);
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+
+
 
 // Функция добавления лайка
-function toggleLike(evt) {
-  evt.target.classList.toggle("element__heart_active");
-}
+// function toggleLike(evt) {
+//   const likesNumber = document.querySelector(".element__heart-counter");
+
+//   if (evt.target.classList.contains("element__heart_active")) {
+//     likesNumber.textContent--;
+//   } else {
+//     likesNumber.textContent++;
+//   }
+
+//   evt.target.classList.toggle("element__heart_active");
+// }
 
 // 4. Добавление новой карточки
 
@@ -124,11 +157,10 @@ function handleNewPlaceFormSubmit(evt) {
     })
     .catch(err => console.log(err))
 
-
-
   evt.preventDefault();
   const newPlaceSubmitButton = document
     .querySelector(".popup__button_type_img");
+
   disableButton(newPlaceSubmitButton);
 
   formNewPlace.reset();
@@ -136,7 +168,6 @@ function handleNewPlaceFormSubmit(evt) {
 }
 
 // Функция удаления карточки
-// todo Спросить как получить _id в таком случае?
 // function removeCard(evt) {
 //   console.log(card._id);
 //   deleteCards(card._id)

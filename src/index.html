@@ -204,7 +204,6 @@
           <h2 class="popup__title">Обновить аватар</h2>
 
           <label class="popup__field">
-            <!-- todo проверить с заменой класса -->
             <input
               id="url-input"
               class="popup__input popup__input_type_avatar-link"
@@ -240,11 +239,15 @@
       />
       <div class="element__wrap">
         <h2 class="element__text">Название места</h2>
-        <button
-          class="element__heart"
-          type="button"
-          aria-label="Поставить лайк"
-        ></button>
+        <div class="element__heart-wrap">
+          <button
+            class="element__heart"
+            type="button"
+            aria-label="Поставить лайк"
+          ></button>
+          <span class="element__heart-counter">0</span>
+        </div>
+
       </div>
     </li>
   </template>

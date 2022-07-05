@@ -11,17 +11,19 @@ import { openPopup, closePopup } from "./utils.js";
 import {
   handleNewPlaceFormSubmit,
   formNewPlace,
+  renderCard,
+  cardsContainer
 } from "./cards.js";
 
 import {
-  openPropfilePopup,
+  openProfilePopup as openProfilePopup,
   handleProfileFormSubmit,
   profileName,
   profileDescription,
   profileAvatar,
 } from "./modal.js";
 
-import { getUser } from "./api";
+import { getUser, getInitialCards } from "./api";
 
 
 enableValidation({
@@ -33,7 +35,7 @@ enableValidation({
   errorClass: "popup__error_visible",
 });
 
-profileButton.addEventListener("click", openPropfilePopup);
+profileButton.addEventListener("click", openProfilePopup);
 
 popupCloseButton.forEach((item) => {
   item.addEventListener("click", () => closePopup(item.closest(".popup")));
@@ -41,22 +43,23 @@ popupCloseButton.forEach((item) => {
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
-// 3. Форма добавления карточки
-
-newPlaceButton.addEventListener("click", () => {
-  openPopup(popupAdd);
-});
+newPlaceButton.addEventListener("click", () => openPopup(popupAdd));
 
 formNewPlace.addEventListener("submit", handleNewPlaceFormSubmit);
+
+let userId;
 // Получаем данные пользователя
-getUser()
-  .then((data) => {
-    profileName.textContent = data.name;
-    profileDescription.textContent = data.about;
-    profileAvatar.src = data.avatar;
+
+Promise.all([getUser(), getInitialCards()])
+  .then(([user, initialCards]) => {
+    // Promise getUser()
+    profileName.textContent = user.name;
+    profileDescription.textContent = user.about;
+    profileAvatar.src = user.avatar;
+    userId = user._id;
+
+    // Promise getInitialCards()
+    initialCards.forEach((card) => {
+      renderCard(card, cardsContainer, userId);
+    })
   })
-  .catch((err) => {
-    console.log(err);
-  });
-
-

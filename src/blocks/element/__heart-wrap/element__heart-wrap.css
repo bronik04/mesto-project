@@ -1,0 +1,4 @@
+.element__heart-wrap {
+  display: flex;
+  flex-direction: column;
+}

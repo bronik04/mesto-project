@@ -40,7 +40,7 @@ export function handleCardClick(cardName, cardImgLink) {
 }
 
 // Функция открытия Popup профиль
-export function openPropfilePopup() {
+export function openProfilePopup() {
   popupName.value = profileName.textContent;
   popupDescription.value = profileDescription.textContent;
   openPopup(popupEdit);
@@ -61,8 +61,7 @@ export function handleProfileFormSubmit(evt) {
 }
 
 
-// ! Попап аватара
-
+// Попап аватара
 avatarButton.addEventListener("click", () => {
   openPopup(avatarPopup);
   cleanErrorUnderline();
@@ -70,7 +69,7 @@ avatarButton.addEventListener("click", () => {
   // todo Очищать поле после закрытия попапа
 })
 
-
+// Изменение Аватара 
 function changeAvatarSubmit(evt) {
   evt.preventDefault();
   editAvatar({ avatar: avatarInput.value })

@@ -59,7 +59,7 @@ Promise.all([getUser(), getInitialCards()])
     userId = user._id;
 
     // Promise getInitialCards()
-    initialCards.forEach((card) => {
+    initialCards.reverse().forEach((card) => {
       renderCard(card, cardsContainer, userId);
     })
   })

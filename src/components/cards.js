@@ -48,7 +48,7 @@ const formNewPlace = document.querySelector(".popup__form_type_add-img");
 
 import { addLike, deleteCards, removeLike, addCards } from "./api.js";
 import { handleCardClick } from "./modal.js";
-import { closePopup, disableButton } from "./utils.js";
+import { closePopup, disableButton, renderLoading } from "./utils.js";
 
 // Создаем новую карточку
 
@@ -99,8 +99,8 @@ function createCards(card, userId) {
   });
 
   const deleteButton = cardElement.querySelector(".element__trash-button");
-  if (card.owner._id === userId) {
-    deleteButton.style.display = "block";
+  if (card.owner._id !== userId) {
+    deleteButton.style.display = "none";
   }
 
 
@@ -144,20 +144,23 @@ export function renderCard(cardElement, container, userId) {
 // }
 
 // 4. Добавление новой карточки
+const placeSubmitButton = document.querySelector(".popup__button_type_img");
 
 function handleNewPlaceFormSubmit(evt) {
+  evt.preventDefault();
+
   const inputElement = {
     name: placeName.value,
     link: placeLink.value,
   }
-
+  renderLoading(placeSubmitButton, true);
   addCards(inputElement)
     .then((cardData) => {
       renderCard(cardData, cardsContainer);
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err))
+    .finally(() => renderLoading(placeSubmitButton, false));
 
-  evt.preventDefault();
   const newPlaceSubmitButton = document
     .querySelector(".popup__button_type_img");
 

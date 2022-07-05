@@ -1,3 +1,11 @@
+export function renderLoading(button, isLoading) {
+  if (isLoading) {
+    button.textContent = "Сохранить...";
+  } else {
+    button.textContent = "Сохранить";
+  }
+}
+
 // Функция открытия Popup
 function openPopup(popup) {
   popup.classList.add("popup_opened");

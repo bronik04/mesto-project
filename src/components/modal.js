@@ -4,6 +4,7 @@ import {
   closePopup,
   cleanErrorUnderline,
   cleanErrorText,
+  renderLoading,
 } from "./utils.js";
 
 import { editAvatar, editProfile } from "./api.js";
@@ -47,17 +48,19 @@ export function openProfilePopup() {
   cleanErrorUnderline();
   cleanErrorText();
 }
-
+const profileSubmitButton = document.querySelector(".popup__button_type_edit");
 // Редактирование имени и информации о себе
 export function handleProfileFormSubmit(evt) {
   evt.preventDefault();
+  renderLoading(profileSubmitButton, true);
   editProfile({ name: popupName.value, about: popupDescription.value })
     .then((data) => {
       profileName.textContent = data.name;
       profileDescription.textContent = data.about;
       closePopup(popupEdit);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => renderLoading(profileSubmitButton, false));
 }
 
 
@@ -66,10 +69,10 @@ avatarButton.addEventListener("click", () => {
   openPopup(avatarPopup);
   cleanErrorUnderline();
   cleanErrorText();
-  // todo Очищать поле после закрытия попапа
+  avatarChangeForm.reset();
 })
 
-// Изменение Аватара 
+// Изменение Аватара
 function changeAvatarSubmit(evt) {
   evt.preventDefault();
   editAvatar({ avatar: avatarInput.value })

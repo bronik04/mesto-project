@@ -1,4 +1,6 @@
-# Проект: Место
+# Проект: [Место](https://bronik04.github.io/mesto-project/)
+
+Фотогалерея с возможностью лайков и удаления
 
 ### Технологии
 
@@ -7,7 +9,5 @@
 - Flexbox
 - Верстка форм
 - JS
-
-### Ссылка на GitHab Pages
-
-https://bronik04.github.io/mesto-project/index.html
+- Валидация форм
+- Вебпак

@@ -46,6 +46,7 @@ export const placeLink = document
   .querySelector(".popup__input_type_place-link");
 const formNewPlace = document.querySelector(".popup__form_type_add-img");
 
+
 import { addLike, deleteCards, removeLike, addCards } from "./api.js";
 import { handleCardClick } from "./modal.js";
 import { closePopup, disableButton, renderLoading } from "./utils.js";
@@ -61,10 +62,10 @@ function createCards(card, userId) {
   elementImage.alt = card.name;
 
   // Добавление лайков
-
   const likesNumber = cardElement.querySelector(".element__heart-counter");
   const likeButton = cardElement.querySelector(".element__heart");
 
+  // Проверка активного лайка
   if (card.likes.find((item) => {
     return userId === item._id;
   })) {
@@ -72,7 +73,6 @@ function createCards(card, userId) {
   }
 
   likesNumber.textContent = card.likes.length;
-
   likeButton.addEventListener("click", (evt) => {
 
     if (!evt.target.classList.contains("element__heart_active")) {
@@ -97,15 +97,17 @@ function createCards(card, userId) {
     }
 
   });
-
+  // Проверка на активную корзину
   const deleteButton = cardElement.querySelector(".element__trash-button");
   if (card.owner._id !== userId) {
     deleteButton.style.display = "none";
+  } else {
+    deleteButton.style.display = "block";
   }
-
 
   // Удаление карточки
   deleteButton.addEventListener("click", (evt) => {
+
     deleteCards(card._id)
       .then(() => {
         evt.target.closest(".element").remove();
@@ -122,7 +124,6 @@ function createCards(card, userId) {
   return cardElement;
 }
 // Функция рендера карточек
-
 export function renderCard(cardElement, container, userId) {
   container.prepend(createCards(cardElement, userId));
 }

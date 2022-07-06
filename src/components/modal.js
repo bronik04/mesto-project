@@ -73,14 +73,16 @@ avatarButton.addEventListener("click", () => {
 })
 
 // Изменение Аватара
+const avatarSubmitButton = document.querySelector(".popup__button_type_avatar");
 function changeAvatarSubmit(evt) {
   evt.preventDefault();
+  renderLoading(avatarSubmitButton, true);
   editAvatar({ avatar: avatarInput.value })
     .then((editData) => {
       profileAvatar.src = editData.avatar;
     })
-    .catch((err) => console.log(err));
-  // profileAvatar.src = avatarInput.value;
+    .catch((err) => console.log(err))
+    .finally(() => renderLoading(false));
   avatarChangeForm.reset();
   closePopup(avatarPopup);
 }

@@ -9,7 +9,6 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
-  /* display: none; */
 }
 
 .element__trash-button:hover {

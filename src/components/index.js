@@ -151,6 +151,7 @@ avatarButton.addEventListener("click", () => {
   openPopup(avatarPopup);
   cleanErrorUnderline();
   cleanErrorText();
+  disableButton(avatarSubmitButton);
   avatarChangeForm.reset();
 });
 

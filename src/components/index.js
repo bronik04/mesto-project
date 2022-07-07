@@ -50,6 +50,8 @@ import {
   editAvatar,
   addCards,
   deleteCards,
+  addLike,
+  removeLike,
 } from "./api";
 
 enableValidation({
@@ -83,12 +85,18 @@ Promise.all([getUser(), getInitialCards()]).then(([user, initialCards]) => {
 
   // Promise getInitialCards()
   initialCards.reverse().forEach((card) => {
-    renderCard(card, cardsContainer, userId, removeCard);
+    renderCard(card, cardsContainer, userId, handleToggleLike, removeCard);
   });
 });
 
 // Функция рендера карточек
-function renderCard(cardElement, container, userId, removeCard) {
+function renderCard(
+  cardElement,
+  container,
+  userId,
+  handleToggleLike,
+  removeCard
+) {
   container.prepend(
     createCard(cardElement, userId, handleToggleLike, removeCard)
   );
@@ -105,7 +113,13 @@ function handleNewPlaceFormSubmit(evt) {
   renderLoading(placeSubmitButton, true);
   addCards(inputElement)
     .then((cardData) => {
-      renderCard(cardData, cardsContainer, userId, removeCard);
+      renderCard(
+        cardData,
+        cardsContainer,
+        userId,
+        removeCard,
+        handleToggleLike
+      );
       closePopup(popupTypeAdd);
     })
     .catch((err) => console.log(err))
@@ -156,34 +170,32 @@ function changeAvatarSubmit(evt) {
 
 avatarChangeForm.addEventListener("submit", changeAvatarSubmit);
 
-function handleToggleLike(evt) {
+function handleToggleLike(evt, cardId, likesNumber, card) {
   likesNumber.textContent = card.likes.length;
-
-  likeButton.addEventListener("click", (evt) => {
-    if (!evt.target.classList.contains("element__heart_active")) {
-      addLike(card._id)
-        .then((data) => {
-          evt.target.classList.toggle("element__heart_active");
-          likesNumber.textContent = data.likes.length;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      removeLike(card._id)
-        .then((data) => {
-          evt.target.classList.toggle("element__heart_active");
-          likesNumber.textContent = data.likes.length;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  });
+  if (!evt.target.classList.contains("element__heart_active")) {
+    addLike(cardId)
+      .then((data) => {
+        evt.target.classList.toggle("element__heart_active");
+        likesNumber.textContent = data.likes.length;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    removeLike(cardId)
+      .then((data) => {
+        evt.target.classList.toggle("element__heart_active");
+        likesNumber.textContent = data.likes.length;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
 
-function removeCard(evt) {
-  deleteCards(card._id)
+// Функция удаления карточки
+function removeCard(evt, cardId) {
+  deleteCards(cardId)
     .then(() => {
       evt.target.closest(".element").remove();
     })
@@ -191,5 +203,3 @@ function removeCard(evt) {
       console.log(err);
     });
 }
-
-// Функция удаления карточки

@@ -1,51 +1,13 @@
-// eslint-disable-next-line no-unused-vars
-// const initialCards = [
-//   {
-//     name: "Алмазная шахта «Мир», Якутия",
-//     link: "https://static.tildacdn.com/tild6336-3238-4436-b966-313836346165/02_shachta_mir.jpg",
-//   },
-//   {
-//     name: "Ординская пещера, Пермский край",
-//     link: "https://static.tildacdn.com/tild3931-6539-4230-b733-383936376339/03_ordinskaya_pesher.jpg",
-//   },
-//   {
-//     name: "Соловецкий монастырь, Архангельская область",
-//     link: "https://static.tildacdn.com/tild6130-6139-4366-b034-383961383638/04_Solovki.jpg",
-//   },
-//   {
-//     name: "Архыз",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-//   },
-//   {
-//     name: "Челябинская область",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-//   },
-//   {
-//     name: "Иваново",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-//   },
-//   {
-//     name: "Камчатка",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-//   },
-//   {
-//     name: "Холмогорский район",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-//   },
-//   {
-//     name: "Байкал",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-//   },
-// ];
 export const cardsContainer = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#card-template").content;
 const popupTypeAdd = document.querySelector(".popup_type_add");
-export const placeName = document
-  .querySelector(".popup__input_type_place-name");
-export const placeLink = document
-  .querySelector(".popup__input_type_place-link");
+export const placeName = document.querySelector(
+  ".popup__input_type_place-name"
+);
+export const placeLink = document.querySelector(
+  ".popup__input_type_place-link"
+);
 const formNewPlace = document.querySelector(".popup__form_type_add-img");
-
 
 import { addLike, deleteCards, removeLike, addCards } from "./api.js";
 import { handleCardClick } from "./modal.js";
@@ -66,15 +28,16 @@ function createCards(card, userId) {
   const likeButton = cardElement.querySelector(".element__heart");
 
   // Проверка активного лайка
-  if (card.likes.find((item) => {
-    return userId === item._id;
-  })) {
+  if (
+    card.likes.find((item) => {
+      return userId === item._id;
+    })
+  ) {
     likeButton.classList.add("element__heart_active");
   }
 
   likesNumber.textContent = card.likes.length;
   likeButton.addEventListener("click", (evt) => {
-
     if (!evt.target.classList.contains("element__heart_active")) {
       addLike(card._id)
         .then((data) => {
@@ -84,7 +47,6 @@ function createCards(card, userId) {
         .catch((err) => {
           console.log(err);
         });
-
     } else {
       removeLike(card._id)
         .then((data) => {
@@ -95,7 +57,6 @@ function createCards(card, userId) {
           console.log(err);
         });
     }
-
   });
   // Проверка на активную корзину
   const deleteButton = cardElement.querySelector(".element__trash-button");
@@ -107,7 +68,6 @@ function createCards(card, userId) {
 
   // Удаление карточки
   deleteButton.addEventListener("click", (evt) => {
-
     deleteCards(card._id)
       .then(() => {
         evt.target.closest(".element").remove();
@@ -127,9 +87,6 @@ function createCards(card, userId) {
 export function renderCard(cardElement, container, userId) {
   container.prepend(createCards(cardElement, userId));
 }
-
-
-
 
 // Функция добавления лайка
 // function toggleLike(evt) {
@@ -153,17 +110,18 @@ function handleNewPlaceFormSubmit(evt) {
   const inputElement = {
     name: placeName.value,
     link: placeLink.value,
-  }
+  };
   renderLoading(placeSubmitButton, true);
   addCards(inputElement)
     .then((cardData) => {
-      renderCard(cardData, cardsContainer);
+      renderCard(cardData, cardsContainer, userId);
     })
     .catch((err) => console.log(err))
     .finally(() => renderLoading(placeSubmitButton, false));
 
-  const newPlaceSubmitButton = document
-    .querySelector(".popup__button_type_img");
+  const newPlaceSubmitButton = document.querySelector(
+    ".popup__button_type_img"
+  );
 
   disableButton(newPlaceSubmitButton);
 

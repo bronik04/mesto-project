@@ -7,21 +7,21 @@ export function renderLoading(button, isLoading) {
 }
 
 // Функция открытия Popup
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", handleEscapeKey);
   document.addEventListener("click", handleOverlay);
 }
 
 // Функция закрытия Popup
-function closePopup(popup) {
+export function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", handleEscapeKey);
   document.removeEventListener("click", handleOverlay);
 }
 
 // Функция закрытия Popup по клику на Esc
-function handleEscapeKey(evt) {
+export function handleEscapeKey(evt) {
   if (evt.key === "Escape") {
     const activePopup = document.querySelector(".popup_opened");
     closePopup(activePopup);
@@ -49,10 +49,8 @@ export function disableButton(buttonElement) {
 }
 
 // Функция закрытия Popup по клику на Overlay
-function handleOverlay(evt) {
+export function handleOverlay(evt) {
   if (evt.target.classList.contains("popup_opened")) {
     closePopup(evt.target);
   }
 }
-
-export { openPopup, closePopup, handleOverlay };

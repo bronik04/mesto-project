@@ -6,7 +6,7 @@ const config = {
   },
 };
 
-export const onResponse = (res) => {
+const onResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
@@ -23,7 +23,7 @@ export const editProfile = (editData) => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "PATCH",
     headers: config.headers,
-    body: JSON.stringify(editData)
+    body: JSON.stringify(editData),
   }).then(onResponse);
 };
 
@@ -31,10 +31,9 @@ export const editAvatar = (editData) => {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: "PATCH",
     headers: config.headers,
-    body: JSON.stringify(editData)
+    body: JSON.stringify(editData),
   }).then(onResponse);
 };
-
 
 export const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
@@ -46,7 +45,7 @@ export const addCards = (inputData) => {
   return fetch(`${config.baseUrl}/cards`, {
     method: "POST",
     headers: config.headers,
-    body: JSON.stringify(inputData)
+    body: JSON.stringify(inputData),
   }).then(onResponse);
 };
 

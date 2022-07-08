@@ -1,9 +1,14 @@
 const cardTemplate = document.querySelector("#card-template").content;
-import { handleCardClick } from "./modal.js";
 
 // Создаем новую карточку
 
-export function createCard(card, userId, handleToggleLike, removeCard) {
+export function createCard(
+  card,
+  userId,
+  handleToggleLike,
+  removeCard,
+  handleCardClick
+) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const elementImage = cardElement.querySelector(".element__img");
 
@@ -37,6 +42,7 @@ export function createCard(card, userId, handleToggleLike, removeCard) {
   deleteButton.addEventListener("click", (evt) => {
     removeCard(evt, card._id);
   });
+  
   // Переключение лайка
   likeButton.addEventListener("click", (evt) => {
     handleToggleLike(evt, card._id, likesNumber, card);

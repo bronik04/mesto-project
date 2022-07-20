@@ -32,7 +32,7 @@ const popupDescription = popupEdit.querySelector(
 let userId;
 // Импорты
 import "../pages/index.css";
-import { enableValidation } from "./validate.js";
+import FormValidator from "./FormValidator.js";
 import {
   renderLoading,
   cleanErrorUnderline,
@@ -44,26 +44,26 @@ import { createCard } from "./cards.js";
 
 import { openPopup, closePopup } from "./modal.js";
 
-import Api from "./api";
-import { apiConfig } from "../utils/data";
+import Api from "./Api";
+import { apiConfig, validationConfig } from "../utils/data";
 
 const api = new Api(apiConfig);
 
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-});
+const profileFormValidation = new FormValidator(validationConfig, profileForm);
+profileFormValidation.enableValidation();
+
+const avatarFormValidation = new FormValidator(validationConfig, avatarChangeForm);
+avatarFormValidation.enableValidation();
+
+const placeFormValidation = new FormValidator(validationConfig, formNewPlace);
+placeFormValidation.enableValidation();
+
 
 popupCloseButton.forEach((item) => {
   item.addEventListener("click", () => closePopup(item.closest(".popup")));
 });
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
-
 newPlaceButton.addEventListener("click", () => openPopup(popupAdd));
 
 // Получаем данные пользователя и карточки

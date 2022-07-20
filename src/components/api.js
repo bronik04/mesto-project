@@ -16,7 +16,7 @@ export default class Api {
     }).then(this._checkResponse);
   };
 
-  editProfile() {
+  editProfile(editData) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
@@ -24,7 +24,7 @@ export default class Api {
     }).then(this._checkResponse);
   };
 
-  editAvatar() {
+  editAvatar(editData) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
@@ -38,7 +38,7 @@ export default class Api {
     }).then(this._checkResponse);
   };
 
-  addCards() {
+  addCards(inputData) {
     return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
@@ -46,21 +46,21 @@ export default class Api {
     }).then(this._checkResponse);
   };
 
-  deleteCards() {
+  deleteCards(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._checkResponse);
   };
 
-  addLike() {
+  addLike(cardId) {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: this._headers,
     }).then(this._checkResponse);
   };
 
-  removeLike() {
+  removeLike(cardId) {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: this._headers,

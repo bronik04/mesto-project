@@ -44,16 +44,10 @@ import { createCard } from "./cards.js";
 
 import { openPopup, closePopup } from "./modal.js";
 
-import {
-  getUser,
-  getInitialCards,
-  editProfile,
-  editAvatar,
-  addCards,
-  deleteCards,
-  addLike,
-  removeLike,
-} from "./api";
+import Api from "./api";
+import { apiConfig } from "../utils/data";
+
+const api = new Api(apiConfig);
 
 enableValidation({
   formSelector: ".popup__form",
@@ -73,25 +67,26 @@ profileForm.addEventListener("submit", handleProfileFormSubmit);
 newPlaceButton.addEventListener("click", () => openPopup(popupAdd));
 
 // Получаем данные пользователя и карточки
-Promise.all([getUser(), getInitialCards()]).then(([user, initialCards]) => {
-  // Promise getUser()
-  profileName.textContent = user.name;
-  profileDescription.textContent = user.about;
-  profileAvatar.src = user.avatar;
-  userId = user._id;
+Promise.all([api.getUser(), api.getInitialCards()])
+  .then(([user, initialCards]) => {
+    // Promise getUser()
+    profileName.textContent = user.name;
+    profileDescription.textContent = user.about;
+    profileAvatar.src = user.avatar;
+    userId = user._id;
 
-  // Promise getInitialCards()
-  initialCards.reverse().forEach((card) => {
-    renderCard(
-      card,
-      cardsContainer,
-      userId,
-      handleToggleLike,
-      removeCard,
-      handleCardClick
-    );
+    // Promise getInitialCards()
+    initialCards.reverse().forEach((card) => {
+      renderCard(
+        card,
+        cardsContainer,
+        userId,
+        handleToggleLike,
+        removeCard,
+        handleCardClick
+      );
+    });
   });
-});
 
 // Функция рендера карточек
 function renderCard(
@@ -122,7 +117,7 @@ function handleNewPlaceFormSubmit(evt) {
   };
   renderLoading(placeSubmitButton, true);
 
-  addCards(inputElement)
+  api.addCards(inputElement)
     .then((cardData) => {
       renderCard(
         cardData,
@@ -146,7 +141,7 @@ formNewPlace.addEventListener("submit", handleNewPlaceFormSubmit);
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   renderLoading(profileSubmitButton, true);
-  editProfile({ name: popupName.value, about: popupDescription.value })
+  api.editProfile({ name: popupName.value, about: popupDescription.value })
     .then((data) => {
       profileName.textContent = data.name;
       profileDescription.textContent = data.about;
@@ -184,7 +179,7 @@ avatarChangeForm.addEventListener("submit", changeAvatarSubmit);
 function handleToggleLike(evt, cardId, likesNumber, card) {
   likesNumber.textContent = card.likes.length;
   if (!evt.target.classList.contains("element__heart_active")) {
-    addLike(cardId)
+    api.addLike(cardId)
       .then((data) => {
         evt.target.classList.toggle("element__heart_active");
         likesNumber.textContent = data.likes.length;
@@ -193,7 +188,7 @@ function handleToggleLike(evt, cardId, likesNumber, card) {
         console.log(err);
       });
   } else {
-    removeLike(cardId)
+    api.removeLike(cardId)
       .then((data) => {
         evt.target.classList.toggle("element__heart_active");
         likesNumber.textContent = data.likes.length;

@@ -1,71 +1,71 @@
-const config = {
-  baseUrl: "https://mesto.nomoreparties.co/v1/plus-cohort-13",
-  headers: {
-    authorization: "1f5793bc-1e32-4ef0-8692-e14a9b20b057",
-    "Content-Type": "application/json",
-  },
-};
-
-const onResponse = (res) => {
-  if (res.ok) {
-    return res.json();
+export default class Api {
+  constructor({ url, headers }) {
+    this._url = url;
+    this._headers = headers;
   }
-  return Promise.reject(`Ошибка: ${res.status}`);
-};
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  };
 
-export const getUser = () => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers,
-  }).then(onResponse);
-};
+  getUser() {
+    return fetch(`${this._url}/users/me`, {
+      headers: this._headers,
+    }).then(this._checkResponse);
+  };
 
-export const editProfile = (editData) => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    method: "PATCH",
-    headers: config.headers,
-    body: JSON.stringify(editData),
-  }).then(onResponse);
-};
+  editProfile() {
+    return fetch(`${this._url}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(editData),
+    }).then(this._checkResponse);
+  };
 
-export const editAvatar = (editData) => {
-  return fetch(`${config.baseUrl}/users/me/avatar`, {
-    method: "PATCH",
-    headers: config.headers,
-    body: JSON.stringify(editData),
-  }).then(onResponse);
-};
+  editAvatar() {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(editData),
+    }).then(this._checkResponse);
+  };
 
-export const getInitialCards = () => {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers,
-  }).then(onResponse);
-};
+  getInitialCards() {
+    return fetch(`${this._url}/cards`, {
+      headers: this._headers,
+    }).then(this._checkResponse);
+  };
 
-export const addCards = (inputData) => {
-  return fetch(`${config.baseUrl}/cards`, {
-    method: "POST",
-    headers: config.headers,
-    body: JSON.stringify(inputData),
-  }).then(onResponse);
-};
+  addCards() {
+    return fetch(`${this._url}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify(inputData),
+    }).then(this._checkResponse);
+  };
 
-export const deleteCards = (cardId) => {
-  return fetch(`${config.baseUrl}/cards/${cardId}`, {
-    method: "DELETE",
-    headers: config.headers,
-  }).then(onResponse);
-};
+  deleteCards() {
+    return fetch(`${this._url}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  };
 
-export const addLike = (cardId) => {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-    method: "PUT",
-    headers: config.headers,
-  }).then(onResponse);
-};
+  addLike() {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  };
 
-export const removeLike = (cardId) => {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-    method: "DELETE",
-    headers: config.headers,
-  }).then(onResponse);
-};
+  removeLike() {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  };
+}
+
+

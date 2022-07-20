@@ -15,4 +15,10 @@ const validationConfig = {
   errorClass: "popup__error_visible",
 };
 
-export { apiConfig, validationConfig };
+const userConfig = {
+  nameSelector: ".profile__name",
+  aboutSelector: ".profile__description",
+  avatarSelector: ".profile__avatar"
+};
+
+export { apiConfig, validationConfig, userConfig };

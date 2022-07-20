@@ -45,9 +45,16 @@ import { createCard } from "./cards.js";
 import { openPopup, closePopup } from "./modal.js";
 
 import Api from "./Api";
-import { apiConfig, validationConfig } from "../utils/data";
+import { apiConfig, validationConfig, userConfig } from "../utils/data";
+import UserInfo from "./UserInfo";
+
 
 const api = new Api(apiConfig);
+const userInfo = new UserInfo(userConfig);
+
+
+
+
 
 const profileFormValidation = new FormValidator(validationConfig, profileForm);
 profileFormValidation.enableValidation();
@@ -69,10 +76,8 @@ newPlaceButton.addEventListener("click", () => openPopup(popupAdd));
 // Получаем данные пользователя и карточки
 Promise.all([api.getUser(), api.getInitialCards()])
   .then(([user, initialCards]) => {
-    // Promise getUser()
-    profileName.textContent = user.name;
-    profileDescription.textContent = user.about;
-    profileAvatar.src = user.avatar;
+    console.log(user);
+    userInfo.setUserInfo(user);
     userId = user._id;
 
     // Promise getInitialCards()

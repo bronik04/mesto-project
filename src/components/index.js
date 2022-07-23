@@ -45,6 +45,7 @@ import { createCard } from "./cards.js";
 import { openPopup, closePopup } from "./modal.js";
 
 import Api from "./Api";
+import Section from "./Section";
 import { apiConfig, validationConfig, userConfig } from "../utils/data";
 import UserInfo from "./UserInfo";
 
@@ -81,6 +82,15 @@ Promise.all([api.getUser(), api.getInitialCards()])
     userId = user._id;
 
     // Promise getInitialCards()
+    // const cardList = new Section({
+    //   items: initialCards,
+    //   renderer: () => {
+    //     cardList.renderItems();
+    //     cardList.addItem();
+    //   }
+    // }, ".elements"
+    // );
+
     initialCards.reverse().forEach((card) => {
       renderCard(
         card,

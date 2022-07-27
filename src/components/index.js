@@ -49,9 +49,16 @@ import Section from "./Section";
 import { apiConfig, validationConfig, userConfig } from "../utils/data";
 import UserInfo from "./UserInfo";
 
-
 const api = new Api(apiConfig);
 const userInfo = new UserInfo(userConfig);
+// const cardList = new Section({
+//   items: initialCards,
+//   renderer: () => {
+//     cardList.renderItems();
+//     cardList.addItem();
+//   }
+// }, ".elements"
+// );
 
 
 
@@ -82,15 +89,6 @@ Promise.all([api.getUser(), api.getInitialCards()])
     userId = user._id;
 
     // Promise getInitialCards()
-    // const cardList = new Section({
-    //   items: initialCards,
-    //   renderer: () => {
-    //     cardList.renderItems();
-    //     cardList.addItem();
-    //   }
-    // }, ".elements"
-    // );
-
     initialCards.reverse().forEach((card) => {
       renderCard(
         card,

@@ -42,7 +42,7 @@ export function createCard(
   deleteButton.addEventListener("click", (evt) => {
     removeCard(evt, card._id);
   });
-  
+
   // Переключение лайка
   likeButton.addEventListener("click", (evt) => {
     handleToggleLike(evt, card._id, likesNumber, card);

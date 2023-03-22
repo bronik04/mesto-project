@@ -30,32 +30,22 @@ const setEventListeners = (formElement, config) => {
     formElement.querySelectorAll(config.inputSelector)
   );
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
-  // чтобы проверить состояние кнопки в самом начале
   toggleButtonState(inputList, buttonElement, config);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
       checkInputValidity(formElement, inputElement, config);
-      // чтобы проверять его при изменении любого из полей
       toggleButtonState(inputList, buttonElement, config);
     });
   });
 };
 
 export const enableValidation = (config) => {
-  // Найдём все формы с указанным классом в DOM,
-  // сделаем из них массив методом Array.from
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-
-  // Переберём полученную коллекцию
-  formList.forEach((formElement) => {
+  const forms = Array.from(document.querySelectorAll(config.formSelector));
+  forms.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
-      // У каждой формы отменим стандартное поведение
       evt.preventDefault();
     });
-
-    // Для каждой формы вызовем функцию setEventListeners,
-    // передав ей элемент формы
     setEventListeners(formElement, config);
   });
 };

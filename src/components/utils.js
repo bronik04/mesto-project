@@ -6,7 +6,6 @@ export function renderLoading(button, isLoading) {
   }
 }
 
-// Функция очистки полей ошибок
 export function cleanErrorText() {
   const errorList = document.querySelectorAll(".popup__error");
   errorList.forEach((error) => {

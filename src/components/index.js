@@ -1,36 +1,22 @@
-const popupAdd = document.querySelector(".popup_type_add");
-const profileButton = document.querySelector(".profile__edit-button");
-const newPlaceButton = document.querySelector(".profile__add-button");
-const popupCloseButton = document.querySelectorAll(".popup__close-button");
-const profileForm = document.querySelector(".popup__form_type_edit");
-// Переменные из modal.js
-const profileSubmitButton = document.querySelector(".popup__button_type_edit");
-const avatarButton = document.querySelector(".profile__avatar-button");
-const avatarChangeForm = document.querySelector(".popup__form_type_avatar");
-const avatarPopup = document.querySelector(".popup_type_avatar");
-const profileAvatar = document.querySelector(".profile__avatar");
-const avatarInput = document.querySelector(".popup__input_type_avatar-link");
-const avatarSubmitButton = document.querySelector(".popup__button_type_avatar");
-// Переменные из cards.js
-const placeSubmitButton = document.querySelector(".popup__button_type_img");
-const placeName = document.querySelector(".popup__input_type_place-name");
-const placeLink = document.querySelector(".popup__input_type_place-link");
-const popupTypeAdd = document.querySelector(".popup_type_add");
-const formNewPlace = document.querySelector(".popup__form_type_add-img");
-const cardsContainer = document.querySelector(".elements");
-const newPlaceSubmitButton = document.querySelector(".popup__button_type_img");
-const profileName = document.querySelector(".profile__name");
-const profileDescription = document.querySelector(".profile__description");
-const popupImage = document.querySelector(".popup__image");
-const popupCaption = document.querySelector(".popup__caption");
-const popupTypeZoom = document.querySelector(".popup_type_zoom");
-const popupEdit = document.querySelector(".popup_type_edit");
-const popupName = popupEdit.querySelector(".popup__input_type_name");
-const popupDescription = popupEdit.querySelector(
-  ".popup__input_type_description"
-);
-let userId;
-// Импорты
+import {
+  avatarButton, avatarChangeForm, avatarInput, avatarPopup, avatarSubmitButton,
+  cardsContainer,
+  formNewPlace,
+  newPlaceButton,
+  newPlaceSubmitButton,
+  placeLink,
+  placeName,
+  placeSubmitButton, popupAdd, popupCaption,
+  popupCloseButton,
+  popupDescription, popupEdit, popupImage,
+  popupName,
+  popupTypeAdd, popupTypeZoom,
+  profileAvatar, profileButton,
+  profileDescription,
+  profileForm,
+  profileName,
+  profileSubmitButton, validationConfig
+} from './constans';
 import "../pages/index.css";
 import { enableValidation } from "./validate.js";
 import {
@@ -39,11 +25,8 @@ import {
   cleanErrorText,
   disableButton,
 } from "./utils.js";
-
 import { createCard } from "./cards.js";
-
 import { openPopup, closePopup } from "./modal.js";
-
 import {
   getUser,
   getInitialCards,
@@ -55,14 +38,8 @@ import {
   removeLike,
 } from "./api";
 
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-});
+let userId;
+enableValidation(validationConfig);
 
 popupCloseButton.forEach((item) => {
   item.addEventListener("click", () => closePopup(item.closest(".popup")));
@@ -72,15 +49,12 @@ profileForm.addEventListener("submit", handleProfileFormSubmit);
 
 newPlaceButton.addEventListener("click", () => openPopup(popupAdd));
 
-// Получаем данные пользователя и карточки
 Promise.all([getUser(), getInitialCards()]).then(([user, initialCards]) => {
-  // Promise getUser()
   profileName.textContent = user.name;
   profileDescription.textContent = user.about;
   profileAvatar.src = user.avatar;
   userId = user._id;
 
-  // Promise getInitialCards()
   initialCards.reverse().forEach((card) => {
     renderCard(
       card,
@@ -93,7 +67,6 @@ Promise.all([getUser(), getInitialCards()]).then(([user, initialCards]) => {
   });
 });
 
-// Функция рендера карточек
 function renderCard(
   cardElement,
   container,
@@ -113,7 +86,6 @@ function renderCard(
   );
 }
 
-// Обработчик добавления новой карточки
 function handleNewPlaceFormSubmit(evt) {
   evt.preventDefault();
   const inputElement = {
@@ -142,7 +114,6 @@ function handleNewPlaceFormSubmit(evt) {
 
 formNewPlace.addEventListener("submit", handleNewPlaceFormSubmit);
 
-// Редактирование имени и информации о себе
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   renderLoading(profileSubmitButton, true);
@@ -232,5 +203,3 @@ function openProfilePopup() {
 }
 
 profileButton.addEventListener("click", openProfilePopup);
-
-// Александр, это было "больно", но необходимо! Спаосибо за исправления!
